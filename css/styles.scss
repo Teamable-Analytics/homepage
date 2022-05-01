@@ -1,0 +1,92 @@
+@import "variables";
+@import "text";
+
+body {
+  background-color: $light;
+  margin: 0;
+  color: $dark;
+  font-family: sans-serif;
+  font-size: 16px;
+  font-weight: normal;
+  height: 100vh;
+}
+
+.container {
+  margin: 0 4rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+
+.flex-row-centered {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.flex-col {
+  display: flex;
+  flex-direction: column;
+}
+
+.img-responsive {
+  width: 100%;
+  min-width: 100px;
+  height: auto;
+}
+
+main.container {
+  margin-top: 3rem;
+  gap: 3rem;
+}
+
+header {
+  gap: 0.5rem;
+  background-color: $primary-blue;
+  color: $light;
+
+  span.title {
+    //font-weight: bold;
+    font-size: 1.5rem;
+  }
+
+  .img-container {
+    display: flex;
+    justify-content: center;
+
+    img {
+      height: 48px;
+      width: 48px;
+    }
+  }
+}
+
+#hero-section {
+  gap: 1.5rem;
+
+  .hero-text {
+    flex-grow: 1;
+
+    .hero-phrase {
+      @include text-title;
+    }
+  }
+
+  #demo-video {
+    flex-grow: 1;
+    //background-color: $primary-blue;
+  }
+}
+
+footer {
+  color: $light;
+  width: 100%;
+  position: fixed;
+  bottom: 0;
+  background-color: $primary-blue;
+}
+

@@ -8,28 +8,6 @@ body {
   height: 100vh;
 }
 
-.container {
-  margin: 0 4rem;
-  display: flex;
-  flex-direction: column;
-}
-
-.flex-row {
-  display: flex;
-  flex-direction: row;
-}
-
-.flex-row-centered {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
-
-.flex-col {
-  display: flex;
-  flex-direction: column;
-}
-
 .img-responsive {
   width: 100%;
   min-width: 100px;
@@ -62,14 +40,14 @@ header .img-container img {
   gap: 1.5rem;
 }
 #hero-section .hero-text {
-  flex-grow: 1;
+  flex: 1 1 0;
 }
 #hero-section .hero-text .hero-phrase {
-  font-size: 4rem;
+  font-size: 3rem;
   font-weight: bold;
 }
 #hero-section #demo-video {
-  flex-grow: 1;
+  flex: 1 1 0;
 }
 
 footer {

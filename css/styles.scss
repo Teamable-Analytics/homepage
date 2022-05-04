@@ -1,37 +1,37 @@
 @import "variables";
 @import "text";
+@import "effects";
+
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&display=swap');
 
 body {
   background-color: $light;
   margin: 0;
   color: $dark;
-  font-family: sans-serif;
+  font-family: 'Manrope', sans-serif;
   font-size: 16px;
   font-weight: normal;
   height: 100vh;
 }
 
-//.container {
-//  margin: 0 4rem;
-//  display: flex;
-//  flex-direction: column;
-//}
+.icon-link {
+  color: $dark;
+  &:hover {
+    color: rgba($dark, 0.75);
+  }
+}
 
-//.flex-row {
-//  display: flex;
-//  flex-direction: row;
-//}
+.items-proportional {
+  > * {
+    flex: 1 1 0;
+  }
+}
 
-//.flex-row-centered {
-//  display: flex;
-//  flex-direction: row;
-//  align-items: center;
-//}
-
-//.flex-col {
-//  display: flex;
-//  flex-direction: column;
-//}
+.stack-items-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .img-responsive {
   width: 100%;
@@ -39,19 +39,23 @@ body {
   height: auto;
 }
 
-main.container {
-  margin-top: 3rem;
-  gap: 3rem;
-}
-
 header {
   gap: 0.5rem;
-  background-color: $primary-blue;
-  color: $light;
+  background-color: $light;
+  color: $primary-blue;
+  box-shadow: 0 0.2rem 0.5rem rgba($dark, 0.05);
 
-  span.title {
-    //font-weight: bold;
+  a {
+    color: $primary-blue;
+    text-decoration: none;
+    &:hover {
+      color: $primary-blue;
+    }
+  }
+
+  .title {
     font-size: 1.5rem;
+    font-weight: 600;
   }
 
   .img-container {
@@ -66,27 +70,48 @@ header {
 }
 
 #hero-section {
-  gap: 1.5rem;
-
   .hero-text {
-    flex: 1 1 0;
-
     .hero-phrase {
       @include text-title;
     }
   }
+}
 
-  #demo-video {
-    flex: 1 1 0;
-    //background-color: $primary-blue;
+#benefits-section {
+  .benefits-card {
+    @include smooth-transition;
+    color: $primary-blue;
+    padding: 2rem;
+    border: 0.2rem solid $primary-blue;
+    border-radius: 0.5rem;
+    box-shadow: 0.4rem 0.4rem 0 $primary-blue;
+    i {
+      font-size: 3rem;
+    }
+    &:hover {
+      color: $dark;
+    }
   }
 }
 
 footer {
+  font-size: 0.75rem;
   color: $light;
   width: 100%;
-  position: fixed;
-  bottom: 0;
   background-color: $primary-blue;
+
+  a {
+    color: $light;
+    &:hover {
+      color: rgba($light, 0.75);
+      text-decoration: none;
+    }
+  }
+
+  ul {
+    margin-bottom: 0;
+    padding-left: 0;
+    list-style-type: none;
+  }
 }
 

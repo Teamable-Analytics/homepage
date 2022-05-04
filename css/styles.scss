@@ -15,9 +15,10 @@ body {
 }
 
 .icon-link {
+  @include smooth-transition;
   color: $dark;
   &:hover {
-    color: rgba($dark, 0.75);
+    color: $primary-blue;
   }
 }
 
@@ -81,7 +82,7 @@ header {
   .benefits-card {
     @include smooth-transition;
     color: $primary-blue;
-    padding: 2rem;
+    padding: 1rem 2rem 2rem;
     border: 0.2rem solid $primary-blue;
     border-radius: 0.5rem;
     box-shadow: 0.4rem 0.4rem 0 $primary-blue;

@@ -10,10 +10,14 @@ body {
 }
 
 .icon-link {
+  -webkit-transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  -moz-transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  -o-transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
+  transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
   color: #1b1b1b;
 }
 .icon-link:hover {
-  color: rgba(27, 27, 27, 0.75);
+  color: #3799FF;
 }
 
 .items-proportional > * {
@@ -69,7 +73,7 @@ header .img-container img {
   -o-transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
   transition: all 0.3s cubic-bezier(0.445, 0.05, 0.55, 0.95);
   color: #3799FF;
-  padding: 2rem;
+  padding: 1rem 2rem 2rem;
   border: 0.2rem solid #3799FF;
   border-radius: 0.5rem;
   box-shadow: 0.4rem 0.4rem 0 #3799FF;

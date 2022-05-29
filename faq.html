@@ -103,7 +103,12 @@
 	</p>
 
     <p><strong>How do I define the projects that I need to assign a team to? </strong></p>
-    <p>xxx
+    <p>In Step 4 labeled "Projects", you can give the set of projects a name
+	first. Next, you can define all the projects that are available in the
+	class. If it is important to match student skills to project requirements,
+	you will want to make sure you identify the appropriate attributes as
+	requirements for the respective projects so that the algorithm can take
+	this information into consideration. 
 	</p>
 
     <p><strong>What if I want to assign multiple teams to a project?</strong></p>
@@ -138,8 +143,28 @@
 	</p>
 
     <p><strong>How do I know which algorithm to use when I generate teams?</strong></p>
-    <p>xxx
+    <p>Currently, Teamable Analytics has 4 algorithms available: the weight
+	algorithm, the priority algorithm, the social algorithm, and the random
+	algorithm. 
 	</p>
+	<ol>
+	<li>If you have a lot of constraints in how you want to build teams,
+	the weight algorithm is the most suitable option because it will try to
+	satisfy a preference for everyone to make everyone happy in some respect. 
+
+	<li> If you have strong feelings about one constraint being satisfied as
+	much as possible first before trying another constraint, you should select
+	the priority algorithm because it lets you indicate the priority of which
+	constraint to handle first.
+
+	<li>If you wish for the students to be in their social groups, the social
+	algorithm is the best choice for this scenario because it will maximize
+	the students' preferences for stated friends and enemies.
+
+	<li>If you only need teams to be of a certain size, then the random
+	algorithm is the easiest to setup because it lets you define teams of
+	specific sizes and does not use any other constraint.
+	</ol>
 
     <p><strong>How should the parameters of the weight algorithm be defined?</strong></p>
     <p>xxx
@@ -206,24 +231,39 @@
 	</p>
 
     <p><strong>What if I don't like the generated team?</strong></p>
-    <p>xxx
+    <p>You can either identify specific students to move to a different team,
+	or re-generate all the teams again.
 	</p>
 
     <p><strong>Does the app support ways to monitor how the teams are doing?</strong></p>
-    <p>xxx
+    <p>Yes, you can select grades from the learning management system's
+	gradebook and display them in the app to better visualize how the teams
+	are performing. The data will be displayed as a box plot graph, so you can see
+	each team's score relative to the class average performance. You can also
+	expand each team to inspect how each student is doing within the team.
 	</p>
 
-    <p><strong>There are too many details in the box plot. How do I zoom in?</strong></p>
-    <p>xxx
+    <p><strong>There are too many details in the box plot graphs. How do I zoom in?</strong></p>
+    <p>You can click on a spot in the graph, keep the mouse down and drag it
+	to another spot in the graph to select an area that you want to zoom into.
+	When you let go of the mouse, that area will appear in closer details. You
+	can double click to zoom back out.
 	</p>
 
     <p><strong>What is the line toggle used for?</strong></p>
-    <p>xxx
+    <p>When you have multiple milestones, you may find it useful to turn on
+	the line toggle option so that you can track the progress of a single team
+	or the progress of an individual within a team. The line helps you quickly
+	see if the scores are trending up or down over time.
 	</p>
 
     <p><strong>Are there ways to tell if a particular student is not doing
 	well in a team?</strong></p>
-    <p>xxx
+    <p>There are two ways to check how individual students are doing. First,
+	you can use the monitoring function to visualize the performance of a
+	student in terms of their gradebook information. 
+	Second, if you have peer evaluations in your course, you can see a summary
+	view of the evaluations that a student received from others in the class.
 	</p>
 
     <p><strong>I have a second milestone in the course and I need to build
@@ -234,38 +274,63 @@
 
     <p><strong>I want the students to submit peer evaluations for their
 	teammates. Does the app support this?</strong></p>
-    <p>xxx
+    <p>Yes, you can go to Step 7 labeled "Peer Evaluations" and follow the
+	steps to create a peer evaluation for students to complete. The steps are
+	similar to creating a survey in the sense that you will need to define
+	attributes first. When you are done, you can preview the peer evaluation
+	from the perspective of the student to verify it looks right to them. 
 	</p>
 
     <p><strong>How do students complete the peer evaluations?</strong></p>
-    <p>xxx in the app
+    <p>The students will need to use Teamable Analytics to complete the peer
+	evaluations. They should see a link to "Teamable Analytics" in the left
+	navigation bar in the learning management system. Once they click on it,
+	the only options available to them in this app is to complete peer
+	evaluations.
+	Unlike surveys, students are expected to complete one peer
+	evaluation for each of their team members. Teams may also have different
+	number of people in a class. For these reasons, we kept the peer
+	evaluations within the app so that we could manage them better.
 	</p>
 
     <p><strong>How long will the peer evaluations be available for?</strong></p>
-    <p>xxx
+    <p>As the instructor, you can check the opening and closing date of the
+	peer evaluation.
 	</p>
 
     <p><strong>Can students see the responses that other students gave about
 	them?</strong></p>
-    <p>xxx
+    <p>When you create the peer evaluation, you can decide if you want the
+	responses to be shared with the student receiving the evaluation. This is
+	a setting you can make for each question in a peer evaluation.
 	</p>
 
     <p><strong>What types of questions can I create in the peer evaluations?</strong></p>
-    <p>xxx
+    <p>Currently, you can create either a multiple choice question or an
+	open-ended text question.
 	</p>
 
     <p><strong>The peer evaluation feedback indicates that some students do
 	not get along and I want to make sure these students are not in the same
 	team for the next milestone. How can I do that?</strong></p>
-    <p>xxx
+    <p>In Step 6 labeled "Teams", you can view the "List of Team Sets" and
+	find the one you were using. Then you can select the icon for re-generate
+	teams. As part of this process, if there are specific peer evaluation
+	feedback you want to use to consider how future teams are formed, you can
+	select those. In addition, if there are certain teams you want to stay the
+	same in the next round, you can lock those teams so that the app won't
+	change the members of those teams.
 	</p>
 
     <p><strong>Is it possible to have students evaluate other teams?</strong></p>
-    <p>xxx
+    <p>Yes, when you create a peer evaluation, you can indicate whether you
+	want the student to evaluate their own teammates or evaluate other teams.
+	This option is useful if you want students to be aware of what other teams
+	are doing and to provide feedback to them. 
 	</p>
 
     <p><strong>Can students do self-evaluations?</strong></p>
-    <p>xxx
+    <p>Unfortunately, that feature is not available yet. 
 	</p>
 
     <p><strong>Can the peer evaluation data be imported back into the learning
@@ -281,6 +346,7 @@
 	have only integrated and tested with the Canvas learning management
 	system.</p>
 </main>
+
 <footer class="py-3">
     <div class="container">
         <div class="d-flex flex-column flex-md-row justify-content-between w-95">

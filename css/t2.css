@@ -1,0 +1,18 @@
+.people_list{
+    display: grid;
+    grid-template-columns: 47px 1fr;
+    grid-template-rows: repeat(10, 75px) ;
+    column-gap: 1.4rem;
+    /*row-gap: 2rem;*/
+    row-gap: 50px;
+}
+
+.people_list img{
+    max-height: 100%;
+    justify-self: center;
+    align-self: end;
+}
+/*colapse margin*/
+/*.person_description p, strong{*/
+/*    margin: 2rem 0;*/
+/*}*/

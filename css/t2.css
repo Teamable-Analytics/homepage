@@ -11,3 +11,7 @@
     justify-self: center;
     align-self: center;
 }
+
+.people_list figcaption{
+    align-self: center;
+}

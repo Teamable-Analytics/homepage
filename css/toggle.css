@@ -1,0 +1,29 @@
+.collapsible {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 18px;
+    background-color: #eee;
+    color: #444;
+    text-align: left;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.collapsible ::after{
+    content: '\25be';
+    float: right;
+    transform: scale(1.5);
+}
+
+.panel{
+    display: none;
+    overflow: auto;
+    padding: 0 18px;
+    background-color: white;
+}
+
+.button_active + .panel{ display: block;}
+
+.button_active{ background-color: #ccc;}
+.button_active ::after{ content: '\25b4'; }

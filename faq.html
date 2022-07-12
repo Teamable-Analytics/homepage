@@ -9,25 +9,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="css/bootstrap/v5.1.3/bootstrap.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+            crossorigin="anonymous"></script>
 
     <link href="css/styles.css" rel="stylesheet">
     <link href="css/footer.css" rel="stylesheet">
-    <link href="css/toggle.css" rel="stylesheet">
-    <script>
-        document.querySelectorAll(".collapsible").forEach(button => {
-            button.addEventListener('click', () => {
-                button.classList.toggle("button_active");
-                console.log("pressed");
-            });
-        });
-
-        // let b = document.getElementsByClassName("collapsible");
-        // for (let i = 0; i < b.length; i++) {
-        // 	b[i].addEventListener("click", function() {
-        // 		this.classList.toggle("active");
-        // 	});
-        // }
-    </script>
 </head>
 
 <body>
@@ -40,482 +27,704 @@
 </header>
 
 <main class="container d-flex flex-column gap-1 my-5">
-    <h1>FAQ</h1>
-    <button type="button" class="collapsible"><strong>How do I start generating teams for my class?</strong></button>
-    <div class="panel">
-        <p>You have to first get your course information imported into the
-            app, then elicit the necessary preferences from your students, specify any
-            project needs you may have, and then you can generate teams. Follow the
-            stepper at the top of the app from left to right to walk through each of
-            these steps one at a time.
-        </p>
+    <div class="accordion" id="accordionExample">
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne"
+                        aria-expanded="true" aria-controls="collapseOne">
+                    <strong>How do I start generating teams for my class?</strong>
+
+                </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    You have to first get your course information imported into the
+                    app, then elicit the necessary preferences from your students, specify any
+                    project needs you may have, and then you can generate teams. Follow the
+                    stepper at the top of the app from left to right to walk through each of
+                    these steps one at a time.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                    <strong>How do I import my course information into the app?</strong>
+                </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Go to Step 1 labeled "Sections". If you haven't already done
+                    so, the app will ask you to import the sections and students into the app.
+                    If you're not sure, you can always import the data again. Also, if you
+                    think you have new students who registered late to your course, you can
+                    click import again and that student will also be added to the app.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                    <strong>How do I view the list of students in the course?</strong>
+                </button>
+            </h2>
+            <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Go to Step 2 labeled "Students". All the imported student
+                    information will show up there. You can always come back to this tab after
+                    the teams are formed to search which team a particular student belongs to.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                    <strong>What are attributes?</strong>
+                </button>
+            </h2>
+            <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    "Attributes" is the generic term we use to refer to the types of
+                    information that you may wish to elicit from students. These include:
+                    personal traits, attitudes, demographic information, characteristics,
+                    expertise, friends preferences, enemies preferences, time slot
+                    availability, and project preferences. Once you have defined the
+                    attributes you want to use, you can add them to the survey and ask your
+                    students to complete the survey. Similarly, if you want to match students
+                    to projects based on their expertise, you can add the expertise-related
+                    attributes as the projects requirements.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFive" aria-expanded="false" aria-controls="collapseFive">
+                    <strong>Why do attributes have question text?</strong>
+                </button>
+            </h2>
+            <div id="collapseFive" class="accordion-collapse collapse" aria-labelledby="headingFive"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Since attributes are being used as part of a survey for eliciting
+                    information from students, you will need to write out the question text
+                    that the students will see for that attribute.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSix">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseSix" aria-expanded="false" aria-controls="collapseSix">
+                    <strong>What is an answer group in an attribute?</strong>
+                </button>
+            </h2>
+            <div id="collapseSix" class="accordion-collapse collapse" aria-labelledby="headingSix"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Since attributes are being used as part of a survey for eliciting
+                    information from students, an attribute has a question and possible
+                    answers that students may respond with. Our app comes with some commonly
+                    used answer groups so that you can use them if you like. If you create a
+                    new answer group, you can also use it at a later time for another
+                    attribute without having to re-define all the details again. Note that for
+                    privacy reasons, some students may not wish to answer sensitive questions.
+                    In these cases, we suggest you include an option for "Prefer not to say".
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSeven">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseSeven" aria-expanded="false" aria-controls="collapseSeven">
+                    <strong>I am not sure which attributes to use or how to define them. Are there any examples I can use?</strong>
+                </button>
+            </h2>
+            <div id="collapseSeven" class="accordion-collapse collapse" aria-labelledby="headingSeven"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Yes, when you go to Step 3 labeled "Attributes", you will see at the
+                    bottom there is a "List of Available Attributes to Import". These are
+                    the commonly used attributes that we found in the research. You can view
+                    them to see if you want to use them as part of your elicitation process.
+                    After you import them, you can also modify them.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingEight">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseEight" aria-expanded="false" aria-controls="collapseEight">
+                    <strong>I want to build teams based on student gender, which I'm fairly
+                        sure is information that the Canvas learning management system already has
+                        about the students. Do I still need to create an attribute for this?</strong>
+                </button>
+            </h2>
+            <div id="collapseEight" class="accordion-collapse collapse" aria-labelledby="headingEight"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Yes, you need to create an attribute for all the information you wish
+                    to elicit and use to generate teams. Aside from the student name, the
+                    student ID, and the course section, we do not get any other student
+                    information from the learning management system. While it may save you
+                    more time if we do grab basic student information, we believe it is
+                    important to that students know exactly what information is being gathered
+                    about them.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingNine">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseNine" aria-expanded="false" aria-controls="collapseNine">
+                    <strong>What if I don't have projects in my course but I still want
+                        students to work in teams?</strong>
+                </button>
+            </h2>
+            <div id="collapseNine" class="accordion-collapse collapse" aria-labelledby="headingNine"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    You can skip the "Projects" step since this information is
+                    optional.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTen" aria-expanded="false" aria-controls="collapseTen">
+                    <strong>How do I define the projects that I need to assign a team to?</strong>
+                </button>
+            </h2>
+            <div id="collapseTen" class="accordion-collapse collapse" aria-labelledby="headingTen"
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    In Step 4 labeled "Projects", you can give the set of projects a name
+                    first. Next, you can define all the projects that are available in the
+                    class. If it is important to match student skills to project requirements,
+                    you will want to make sure you identify the appropriate attributes as
+                    requirements for the respective projects so that the
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingEleven">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseEleven" aria-expanded="true" aria-controls="collapseEleven ">
+                    <strong>What if I want to assign multiple teams to a project?</strong>
+                </button>
+            </h2>
+            <div id="collapseEleven" class="accordion-collapse collapse" aria-labelledby="headingEleven  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    You can first define the project, then clone it, and give it a
+                    different name. Then when you generate teams, one team will be assigned to
+                    the original project and another team will be assigned to the cloned
+                    project.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTweleve">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTweleve   " aria-expanded="false" aria-controls="collapseTweleve ">
+                    <strong>Can I modify project requirements after the teams have been generated?</strong>
+                </button>
+            </h2>
+            <div id="collapseTweleve" class="accordion-collapse collapse" aria-labelledby="headingTweleve  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Unfortunately, once the teams have been generated, you cannot
+                    modify the requirements. If you need to change the projects, you will need
+                    to create a new project set with new projects, and then re-generate the
+                    teams.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirdteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirdteen   " aria-expanded="false" aria-controls="collapseThirdteen ">
+                    <strong>Why do I have to build surveys?</strong>
+                </button>
+            </h2>
+            <div id="collapseThirdteen" class="accordion-collapse collapse" aria-labelledby="headingThirdteen  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    The purpose of the survey is to help you elicit student
+                    characteristics and preferences. If you have already created all the
+                    necessary attributes that correspond to information you wish to elicit
+                    from your students, you can simply add them to the survey.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFourteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFourteen   " aria-expanded="false" aria-controls="collapseFourteen ">
+                    <strong>Will students use this app to answer the survey?</strong>
+                </button>
+            </h2>
+            <div id="collapseFourteen" class="accordion-collapse collapse" aria-labelledby="headingFourteen  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    No, once you are done building the survey, you can publish it
+                    in the learning management system. In Canvas, the published survey will
+                    show up as a quiz. Students can complete the quiz in Canvas.
+                </div>
+            </div>
+        </div>
+<!--
+<p><strong>something about Generate teams</strong></p>
+<p>xxx
+</p>
+-->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingFifteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseFifteen   " aria-expanded="false" aria-controls="collapseFifteen ">
+                    <strong>How do I know which algorithm to use when I generate teams?</strong>
+                </button>
+            </h2>
+            <div id="collapseFifteen" class="accordion-collapse collapse" aria-labelledby="headingFifteen  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Currently, Teamable Analytics has 4 algorithms available: the weight
+                    algorithm, the priority algorithm, the social algorithm, and the random
+                    algorithm.
+                    <ol>
+                        <li>If you have a lot of constraints in how you want to build teams,
+                            the weight algorithm is the most suitable option because it will try to
+                            satisfy a preference for everyone to make everyone happy in some respect.
+
+                        <li> If you have strong feelings about one constraint being satisfied as
+                            much as possible first before trying another constraint, you should select
+                            the priority algorithm because it lets you indicate the priority of which
+                            constraint to handle first.
+
+                        <li>If you wish for the students to be in their social groups, the social
+                            algorithm is the best choice for this scenario because it will maximize
+                            the students' preferences for stated friends and enemies.
+
+                        <li>If you only need teams to be of a certain size, then the random
+                            algorithm is the easiest to setup because it lets you define teams of
+                            specific sizes and does not use any other constraint.
+                    </ol>
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingSeventeen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseSeventeen   " aria-expanded="false" aria-controls="collapseSeventeen ">
+                    <strong>Can I compare two sets of teams that I generated at different times?</strong>
+                </button>
+            </h2>
+            <div id="collapseSeventeen" class="accordion-collapse collapse" aria-labelledby="headingSeventeen  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Yes. When you view a set of generated teams, you will see at the top of
+                    the page the parameters that were used to generate these teams. There is
+                    also some summary statistics about the overall teams. You can use this
+                    summary to compare which set of teams is better for your class.
+                    We will be extending on the available summary statistics in the near future.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingEighteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseEighteen   " aria-expanded="false" aria-controls="collapseEighteen ">
+                    <strong>How do I know if the generated teams are any good?</strong>
+                </button>
+            </h2>
+            <div id="collapseEighteen" class="accordion-collapse collapse" aria-labelledby="headingEighteen  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    In addition to the summary statistics of the team set, our app provides
+                    visual analytics to help you quickly inspect how well a team adheres to
+                    the criteria you selected for forming teams. When you view a team set, you
+                    can select the attributes that you wish to use as part of this diagnosis,
+                    the type of graph to use for an attribute, and click "Visualize". Each
+                    team will have appear with the set of visual analytics. You can also
+                    expand a team and the same visual analytics will appear for each
+                    individual team member. This will also help you detect if a specific
+                    member should be moved to a different team or not.
+                </div>
+            </div>
+        </div>
+<!--
+<p><strong>When should I use a pie chart and how do I interpret the graph?</strong></p>
+<p>xxx
+</p>
+
+<p><strong>When should I use a tally view and how do I interpret the
+details?</strong></p>
+<p>xxx
+</p>
+
+<p><strong>When should I use a satisfaction percentage and how do I interpret the
+details?</strong></p>
+<p>xxx
+</p>
+
+<p><strong>When should I use a heat map and how do I interpret the visual?</strong></p>
+<p>xxx
+</p>
+
+<p><strong>When should I use a group bar graph and how do I interpret the graph?</strong></p>
+<p>xxx
+</p>
+
+<p><strong>When should I use a radar graph and how do I interpret the graph?</strong></p>
+<p>xxx
+</p>
+-->
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingNineteen">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseNineteen   " aria-expanded="false" aria-controls="collapseNineteen ">
+                    <strong>What if I don't like the generated team?</strong>
+                </button>
+            </h2>
+            <div id="collapseNineteen" class="accordion-collapse collapse" aria-labelledby="headingNineteen  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    You can either identify specific students to move to a different team,
+                    or re-generate all the teams again.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwenty">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwenty   " aria-expanded="false" aria-controls="collapseTwenty ">
+                    <strong>Does the app support ways to monitor how the teams are doing?</strong>
+                </button>
+            </h2>
+            <div id="collapseTwenty" class="accordion-collapse collapse" aria-labelledby="headingTwenty  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Yes, you can select grades from the learning management system's
+                    gradebook and display them in the app to better visualize how the teams
+                    are performing. The data will be displayed as a box plot graph, so you can see
+                    each team's score relative to the class average performance. You can also
+                    expand each team to inspect how each student is doing within the team.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentyone">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentyone   " aria-expanded="false" aria-controls="collapseTwentyone ">
+                    <strong>There are too many details in the box plot graphs. How do I zoom in?</strong>
+                </button>
+            </h2>
+            <div id="collapseTwentyone" class="accordion-collapse collapse" aria-labelledby="headingTwentyone  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    You can click on a spot in the graph, keep the mouse down and drag it
+                    to another spot in the graph to select an area that you want to zoom into.
+                    When you let go of the mouse, that area will appear in closer details. You
+                    can double click to zoom back out.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentyTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentyTwo   " aria-expanded="false" aria-controls="collapseTwentyTwo ">
+                    <strong>What is the line toggle used for?</strong>
+                </button>
+            </h2>
+            <div id="collapseTwentyTwo" class="accordion-collapse collapse" aria-labelledby="headingTwentyTwo  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    When you have multiple milestones, you may find it useful to turn on
+                    the line toggle option so that you can track the progress of a single team
+                    or the progress of an individual within a team. The line helps you quickly
+                    see if the scores are trending up or down over time.
+                </div>
+            </div>
+        </div>
+
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentyThree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentyThree   " aria-expanded="false" aria-controls="collapseTwentyThree ">
+                    <strong>Are there ways to tell if a particular student is not doing well in a team?</strong>
+                </button>
+            </h2>
+            <div id="collapseTwentyThree" class="accordion-collapse collapse" aria-labelledby="headingTwentyThree  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    There are two ways to check how individual students are doing. First,
+                    you can use the monitoring function to visualize the performance of a
+                    student in terms of their gradebook information.
+                    Second, if you have peer evaluations in your course, you can see a summary
+                    view of the evaluations that a student received from others in the class.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentyFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentyFour   " aria-expanded="false" aria-controls="collapseTwentyFour ">
+                    <strong>I have a second milestone in the course and I need to build
+                        teams again. Is there a way to ensure students do not work with the same
+                        people again?</strong>
+                </button>
+            </h2>
+            <div id="collapseTwentyFour" class="accordion-collapse collapse" aria-labelledby="headingTwentyFour  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    If the students completed peer evaluations that indicated they do not
+                    want to work together again, you can use the re-generate feature and the
+                    new social preferences will be considered for the next milestone.
+                    However,
+                    there is no way to guarantee it because the algorithms just try to do
+                    the
+                    best they can given all the constraints specified.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentyFive">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentyFive   " aria-expanded="false" aria-controls="collapseTwentyFive ">
+                    <strong>I want the students to
+                        submit peer evaluations for their
+                        teammates. Does the app support this?</strong>
+                </button>
+            </h2>
+            <div id="collapseTwentyFive" class="accordion-collapse collapse" aria-labelledby="headingTwentyFive  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Yes, you can go to Step 7 labeled "Peer Evaluations" and follow the
+                    steps to create a peer evaluation for students to complete. The
+                    steps are
+                    similar to creating a survey in the sense that you will need to
+                    define
+                    attributes first. When you are done, you can preview the peer
+                    evaluation
+                    from the perspective of the student to verify it looks right to
+                    them.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentySix">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentySix   " aria-expanded="false" aria-controls="collapseTwentySix ">
+                    <strong>How do students
+                        complete the peer evaluations?</strong>
+                </button>
+            </h2>
+            <div id="collapseTwentySix" class="accordion-collapse collapse" aria-labelledby="headingTwentySix  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    The students will need to use Teamable Analytics to complete the
+                    peer
+                    evaluations. They should see a link to "Teamable Analytics" in
+                    the left
+                    navigation bar in the learning management system. Once they
+                    click on it,
+                    the only options available to them in this app is to complete
+                    peer
+                    evaluations.
+                    Unlike surveys, students are expected to complete one peer
+                    evaluation for each of their team members. Teams may also have
+                    different
+                    number of people in a class. For these reasons, we kept the peer
+                    evaluations within the app so that we could manage them better.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentySeven">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentySeven   " aria-expanded="false" aria-controls="collapseTwentySeven ">
+                    <strong>How long will the
+                        peer evaluations be available for?</strong>
+                </button>
+            </h2>
+            <div id="collapseTwentySeven" class="accordion-collapse collapse" aria-labelledby="headingTwentySeven  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    As the instructor, you can check the opening and closing date
+                    of the
+                    peer evaluation.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentyEight">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentyEight   " aria-expanded="false" aria-controls="collapseTwentyEight ">
+                    <strong>Can students
+                        see the responses that other students gave about
+                        them?</strong>
+                </button>
+            </h2>
+            <div id="collapseTwentyEight" class="accordion-collapse collapse" aria-labelledby="headingTwentyEight  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    When you create the peer evaluation, you can decide if
+                    you want the
+                    responses to be shared with the student receiving the
+                    evaluation. This is
+                    a setting you can make for each question in a peer
+                    evaluation.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwentyNine">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseTwentyNine   " aria-expanded="false" aria-controls="collapseTwentyNine ">
+                    <strong>What types
+                        of questions can I create in the peer
+                        evaluations?</strong>
+                </button>
+            </h2>
+            <div id="collapseTwentyNine" class="accordion-collapse collapse" aria-labelledby="headingTwentyNine  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Currently, you can create either a multiple choice
+                    question or an
+                    open-ended text question.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirty">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirty   " aria-expanded="false" aria-controls="collapseThirty ">
+                    <strong>The
+                        peer evaluation feedback indicates that some
+                        students do
+                        not get along and I want to make sure these students
+                        are not in the same
+                        team for the next milestone. How can I do
+                        that?</strong>
+                </button>
+            </h2>
+            <div id="collapseThirty" class="accordion-collapse collapse" aria-labelledby="headingThirty  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    In Step 6 labeled "Teams", you can view the "List
+                    of Team Sets" and
+                    find the one you were using. Then you can select
+                    the icon for re-generate
+                    teams. As part of this process, if there are
+                    specific peer evaluation
+                    feedback you want to use to consider how future
+                    teams are formed, you can
+                    select those. In addition, if there are certain
+                    teams you want to stay the
+                    same in the next round, you can lock those teams
+                    so that the app won't
+                    change the members of those teams.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirtyOne">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirtyOne   " aria-expanded="false" aria-controls="collapseThirtyOne ">
+                    <strong>Is
+                        it possible to have students evaluate other
+                        teams?</strong>
+                </button>
+            </h2>
+            <div id="collapseThirtyOne" class="accordion-collapse collapse" aria-labelledby="headingThirtyOne  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Yes, when you create a peer evaluation, you
+                    can indicate whether you
+                    want the student to evaluate their own
+                    teammates or evaluate other teams.
+                    This option is useful if you want students
+                    to be aware of what other teams
+                    are doing and to provide feedback to them.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirtyTwo">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirtyTwo   " aria-expanded="false" aria-controls="collapseThirtyTwo ">
+                    <strong>Can students do
+                        self-evaluations?</strong>
+                </button>
+            </h2>
+            <div id="collapseThirtyTwo" class="accordion-collapse collapse" aria-labelledby="headingThirtyTwo  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Unfortunately, that feature is not
+                    available yet.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirtyTree">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirtyTree   " aria-expanded="false" aria-controls="collapseThirtyTree ">
+                    <strong>Can the peer evaluation data be
+                        imported back into the learning
+                        management system?</strong>
+                </button>
+            </h2>
+            <div id="collapseThirtyTree" class="accordion-collapse collapse" aria-labelledby="headingThirtyTree  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Yes. There is an export function in
+                    Step 7 for you to export and
+                    download the data from Teamable
+                    Analytics.
+                </div>
+            </div>
+        </div>
+        <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThirtyFour">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapseThirtyFour   " aria-expanded="false" aria-controls="collapseThirtyFour ">
+                    <strong>Does
+                        Teamable Analytics work with other
+                        learning management
+                        systems?</strong>
+                </button>
+            </h2>
+            <div id="collapseThirtyFour" class="accordion-collapse collapse" aria-labelledby="headingThirtyFour  "
+                 data-bs-parent="#accordionExample">
+                <div class="accordion-body">
+                    Teamable Analytics interacts with
+                    the learning management
+                    system via the LTI protocol. As
+                    such, our app can be tweaked so
+                    that it
+                    works with another LMS that also
+                    uses the LTI protocol. At
+                    present, we
+                    have only integrated and tested
+                    with the Canvas learning
+                    management
+                    system.
+                </div>
+            </div>
+        </div>
+
+
     </div>
 
-
-    <button type="button" class="collapsible"><strong>How do I import my course information into the app?</strong>
-    </button>
-    <div class="panel">
-        <p>Go to Step 1 labeled "Sections". If you haven't already done
-            so, the app will ask you to import the sections and students into the app.
-            If you're not sure, you can always import the data again. Also, if you
-            think you have new students who registered late to your course, you can
-            click import again and that student will also be added to the app.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>How do I view the list of students in the course?</strong>
-    </button>
-    <div class="panel">
-        <p>Go to Step 2 labeled "Students". All the imported student
-            information will show up there. You can always come back to this tab after
-            the teams are formed to search which team a particular student belongs to.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>What are attributes?</strong></button>
-    <div class="panel">
-        <p>"Attributes" is the generic term we use to refer to the types of
-            information that you may wish to elicit from students. These include:
-            personal traits, attitudes, demographic information, characteristics,
-            expertise, friends preferences, enemies preferences, time slot
-            availability, and project preferences. Once you have defined the
-            attributes you want to use, you can add them to the survey and ask your
-            students to complete the survey. Similarly, if you want to match students
-            to projects based on their expertise, you can add the expertise-related
-            attributes as the projects requirements.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>Why do attributes have question text?</strong></button>
-    <div class="panel">
-        <p>Since attributes are being used as part of a survey for eliciting
-            information from students, you will need to write out the question text
-            that the students will see for that attribute.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>What is an answer group in an attribute?</strong></button>
-    <div class="panel">
-        <p>Since attributes are being used as part of a survey for eliciting
-            information from students, an attribute has a question and possible
-            answers that students may respond with. Our app comes with some commonly
-            used answer groups so that you can use them if you like. If you create a
-            new answer group, you can also use it at a later time for another
-            attribute without having to re-define all the details again. Note that for
-            privacy reasons, some students may not wish to answer sensitive questions.
-            In these cases, we suggest you include an option for "Prefer not to say".
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>I am not sure which attributes to use or how to define them.
-        Are there any examples I can use?</strong></button>
-    <div class="panel">
-        <p>Yes, when you go to Step 3 labeled "Attributes", you will see at the
-            bottom there is a "List of Available Attributes to Import". These are
-            the commonly used attributes that we found in the research. You can view
-            them to see if you want to use them as part of your elicitation process.
-            After you import them, you can also modify them.
-        </p>
-    </div>
-
-
-    <button type="button" class="collapsible"><strong>I want to build teams based on student gender, which I'm fairly
-        sure is information that the Canvas learning management system already has
-        about the students. Do I still need to create an attribute for this?</strong></button>
-    <div class="panel">
-        <p>Yes, you need to create an attribute for all the information you wish
-            to elicit and use to generate teams. Aside from the student name, the
-            student ID, and the course section, we do not get any other student
-            information from the learning management system. While it may save you
-            more time if we do grab basic student information, we believe it is
-            important to that students know exactly what information is being gathered
-            about them.
-        </p>
-    </div>
-
-
-    <button type="button" class="collapsible"><strong>What if I don't have projects in my course but I still want
-        students to work in teams?</strong></button>
-    <div class="panel">
-        <p>You can skip the "Projects" step since this information is
-            optional.
-        </p>
-    </div>
-
-
-    <button type="button" class="collapsible"><strong>How do I define the projects that I need to assign a team
-        to? </strong></button>
-    <div class="panel">
-        <p>In Step 4 labeled "Projects", you can give the set of projects a name
-            first. Next, you can define all the projects that are available in the
-            class. If it is important to match student skills to project requirements,
-            you will want to make sure you identify the appropriate attributes as
-            requirements for the respective projects so that the algorithm can take
-            this information into consideration.
-        </p>
-    </div>
-
-
-    <button type="button" class="collapsible"><strong>What if I want to assign multiple teams to a project?</strong>
-    </button>
-    <div class="panel">
-        <p>You can first define the project, then clone it, and give it a
-            different name. Then when you generate teams, one team will be assigned to
-            the original project and another team will be assigned to the cloned
-            project.
-        </p>
-    </div>
-
-
-    <button type="button" class="collapsible"><strong>Can I modify project requirements after the teams have been
-        generated?</strong></button>
-    <div class="panel">
-        <p>Unfortunately, once the teams have been generated, you cannot
-            modify the requirements. If you need to change the projects, you will need
-            to create a new project set with new projects, and then re-generate the
-            teams.
-        </p>
-    </div>
-
-
-    <button type="button" class="collapsible"><strong>Why do I have to build surveys?</strong></button>
-    <div class="panel">
-        <p>The purpose of the survey is to help you elicit student
-            characteristics and preferences. If you have already created all the
-            necessary attributes that correspond to information you wish to elicit
-            from your students, you can simply add them to the survey.
-        </p>
-    </div>
-
-
-    <button type="button" class="collapsible"><strong>Will students use this app to answer the survey?</strong></button>
-    <div class="panel">
-        <p>No, once you are done building the survey, you can publish it
-            in the learning management system. In Canvas, the published survey will
-            show up as a quiz. Students can complete the quiz in Canvas. </p>
-    </div>
-
-
-    <!--
-    <p><strong>something about Generate teams</strong></p>
-    <p>xxx
-	</p>
-	-->
-
-    <button type="button" class="collapsible"><strong>How do I know which algorithm to use when I generate
-        teams?</strong></button>
-    <div class="panel">
-        <p>Currently, Teamable Analytics has 4 algorithms available: the weight
-            algorithm, the priority algorithm, the social algorithm, and the random
-            algorithm.
-        </p>
-        <ol>
-            <li>If you have a lot of constraints in how you want to build teams,
-                the weight algorithm is the most suitable option because it will try to
-                satisfy a preference for everyone to make everyone happy in some respect.
-
-            <li> If you have strong feelings about one constraint being satisfied as
-                much as possible first before trying another constraint, you should select
-                the priority algorithm because it lets you indicate the priority of which
-                constraint to handle first.
-
-            <li>If you wish for the students to be in their social groups, the social
-                algorithm is the best choice for this scenario because it will maximize
-                the students' preferences for stated friends and enemies.
-
-            <li>If you only need teams to be of a certain size, then the random
-                algorithm is the easiest to setup because it lets you define teams of
-                specific sizes and does not use any other constraint.
-        </ol>
-    </div>
-
-    <!--
-    <p><strong>How should the parameters of the weight algorithm be defined?</strong></p>
-    <p>xxx
-    </p>
-
-    <p><strong>How should the parameters of the priority algorithm be defined?</strong></p>
-    <p>xxx
-    </p>
-
-    <p><strong>How should the parameters of the social algorithm be defined?</strong></p>
-    <p>xxx
-    </p>
-    -->
-
-    <button type="button" class="collapsible"><strong>Where can I see the generated teams?</strong></button>
-    <div class="panel">
-        <p>In Step 6 labeled "Teams", you can see "List of Team Sets" that have
-            been generated in your course.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>Can I compare two sets of teams that I generated at
-        different times?</strong></button>
-    <div class="panel">
-        <p>Yes. When you view a set of generated teams, you will see at the top of
-            the page the parameters that were used to generate these teams. There is
-            also some summary statistics about the overall teams. You can use this
-            summary to compare which set of teams is better for your class.
-            We will be extending on the available summary statistics in the near future.
-        </p>
-    </div>
-
-
-    <button type="button" class="collapsible"><strong>How do I know if the generated teams are any
-        good?</strong></button>
-    <div class="panel">
-        <p>In addition to the summary statistics of the team set, our app provides
-            visual analytics to help you quickly inspect how well a team adheres to
-            the criteria you selected for forming teams. When you view a team set, you
-            can select the attributes that you wish to use as part of this diagnosis,
-            the type of graph to use for an attribute, and click "Visualize". Each
-            team will have appear with the set of visual analytics. You can also
-            expand a team and the same visual analytics will appear for each
-            individual team member. This will also help you detect if a specific
-            member should be moved to a different team or not.
-        </p>
-    </div>
-
-    <!--
-    <p><strong>When should I use a pie chart and how do I interpret the graph?</strong></p>
-    <p>xxx
-    </p>
-
-    <p><strong>When should I use a tally view and how do I interpret the
-    details?</strong></p>
-    <p>xxx
-    </p>
-
-    <p><strong>When should I use a satisfaction percentage and how do I interpret the
-    details?</strong></p>
-    <p>xxx
-    </p>
-
-    <p><strong>When should I use a heat map and how do I interpret the visual?</strong></p>
-    <p>xxx
-    </p>
-
-    <p><strong>When should I use a group bar graph and how do I interpret the graph?</strong></p>
-    <p>xxx
-    </p>
-
-    <p><strong>When should I use a radar graph and how do I interpret the graph?</strong></p>
-    <p>xxx
-    </p>
-    -->
-
-    <button type="button" class="collapsible"><strong>What if I don't like the generated team?</strong></button>
-    <div class="panel">
-        <p>You can either identify specific students to move to a different team,
-            or re-generate all the teams again.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>Does the app support ways to monitor how the
-        teams are doing?</strong></button>
-    <div class="panel">
-        <p>Yes, you can select grades from the learning management system's
-            gradebook and display them in the app to better visualize how the teams
-            are performing. The data will be displayed as a box plot graph, so you can see
-            each team's score relative to the class average performance. You can also
-            expand each team to inspect how each student is doing within the team.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>There are too many details in the box plot
-        graphs. How do I zoom in?</strong></button>
-    <div class="panel">
-        <p>You can click on a spot in the graph, keep the mouse down and drag it
-            to another spot in the graph to select an area that you want to zoom into.
-            When you let go of the mouse, that area will appear in closer details. You
-            can double click to zoom back out.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>What is the line toggle used
-        for?</strong></button>
-    <div class="panel">
-        <p>When you have multiple milestones, you may find it useful to turn on
-            the line toggle option so that you can track the progress of a single team
-            or the progress of an individual within a team. The line helps you quickly
-            see if the scores are trending up or down over time.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>Are there ways to tell if a
-        particular student is not doing
-        well in a team?</strong></button>
-    <div class="panel">
-        <p>There are two ways to check how individual students are doing. First,
-            you can use the monitoring function to visualize the performance of a
-            student in terms of their gradebook information.
-            Second, if you have peer evaluations in your course, you can see a summary
-            view of the evaluations that a student received from others in the class.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>I have a second milestone in
-        the course and I need to build
-        teams again. Is there a way to ensure students do not work with the same
-        people again?</strong></button>
-    <div class="panel">
-        <p>If the students completed peer evaluations that indicated they do not
-            want to work together again, you can use the re-generate feature and the
-            new social preferences will be considered for the next milestone.
-            However,
-            there is no way to guarantee it because the algorithms just try to do
-            the
-            best they can given all the constraints specified.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>I want the students to
-        submit peer evaluations for their
-        teammates. Does the app support this?</strong></button>
-    <div class="panel">
-        <p>Yes, you can go to Step 7 labeled "Peer Evaluations" and follow the
-            steps to create a peer evaluation for students to complete. The
-            steps are
-            similar to creating a survey in the sense that you will need to
-            define
-            attributes first. When you are done, you can preview the peer
-            evaluation
-            from the perspective of the student to verify it looks right to
-            them.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>How do students
-        complete the peer evaluations?</strong></button>
-    <div class="panel">
-        <p>The students will need to use Teamable Analytics to complete the
-            peer
-            evaluations. They should see a link to "Teamable Analytics" in
-            the left
-            navigation bar in the learning management system. Once they
-            click on it,
-            the only options available to them in this app is to complete
-            peer
-            evaluations.
-            Unlike surveys, students are expected to complete one peer
-            evaluation for each of their team members. Teams may also have
-            different
-            number of people in a class. For these reasons, we kept the peer
-            evaluations within the app so that we could manage them better.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>How long will the
-        peer evaluations be available for?</strong></button>
-    <div class="panel">
-        <p>As the instructor, you can check the opening and closing date
-            of the
-            peer evaluation.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>Can students
-        see the responses that other students gave about
-        them?</strong></button>
-    <div class="panel">
-        <p>When you create the peer evaluation, you can decide if
-            you want the
-            responses to be shared with the student receiving the
-            evaluation. This is
-            a setting you can make for each question in a peer
-            evaluation.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>What types
-        of questions can I create in the peer
-        evaluations?</strong></button>
-    <div class="panel">
-        <p>Currently, you can create either a multiple choice
-            question or an
-            open-ended text question.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>The
-        peer evaluation feedback indicates that some
-        students do
-        not get along and I want to make sure these students
-        are not in the same
-        team for the next milestone. How can I do
-        that?</strong></button>
-    <div class="panel">
-        <p>In Step 6 labeled "Teams", you can view the "List
-            of Team Sets" and
-            find the one you were using. Then you can select
-            the icon for re-generate
-            teams. As part of this process, if there are
-            specific peer evaluation
-            feedback you want to use to consider how future
-            teams are formed, you can
-            select those. In addition, if there are certain
-            teams you want to stay the
-            same in the next round, you can lock those teams
-            so that the app won't
-            change the members of those teams.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible"><strong>Is
-        it possible to have students evaluate other
-        teams?</strong></button>
-    <div class="panel">
-        <p>Yes, when you create a peer evaluation, you
-            can indicate whether you
-            want the student to evaluate their own
-            teammates or evaluate other teams.
-            This option is useful if you want students
-            to be aware of what other teams
-            are doing and to provide feedback to them.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible">
-        <strong>Can students do
-            self-evaluations?</strong></button>
-    <div class="panel">
-        <p>Unfortunately, that feature is not
-            available yet.
-        </p>
-    </div>
-
-    <button type="button" class="collapsible">
-        <strong>Can the peer evaluation data be
-            imported back into the learning
-            management system?</strong></button>
-    <div class="panel">
-        <p>Yes. There is an export function in
-            Step 7 for you to export and
-            download the data from Teamable
-            Analytics.
-        </p>
-    </div>
-
-    <button type="button"
-            class="collapsible"><strong>Does
-        Teamable Analytics work with other
-        learning management
-        systems?</strong></button>
-    <div class="panel">
-        <p>Teamable Analytics interacts with
-            the learning management
-            system via the LTI protocol. As
-            such, our app can be tweaked so
-            that it
-            works with another LMS that also
-            uses the LTI protocol. At
-            present, we
-            have only integrated and tested
-            with the Canvas learning
-            management
-            system. </p>
-    </div>
 </main>
 
 <footer class="py-3">

@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../css/bootstrap/v5.1.3/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../css/footer.css" rel="stylesheet">
+</head>
+
+<body>
+    <header class="d-flex flex-row align-items-center p-3">
+        <div class="img-container">
+            <a href="index.html"><img src="../assets/img/logo-transparent-blue.png" alt="Teamable Analytics Logo" /></a>
+        </div>
+        <span class="title"><a href="index.html">Teamable Analytics</a></span>
+    </header>
+
+    <main class="container d-flex flex-column gap-1 my-5">
+        <h1>Algorithms API</h1>
+
+        <section>
+            <div class="d-flex flex-column gap-4">
+                <div>
+                    <div class="fw-bolder" for="students">Class of Students</div>
+                    <!-- Upload a file -->
+                    <input type="file" id="students-file" class="form-control" accept=".json" />
+
+                    <small id="students-helper">
+                        The file should be a JSON with the following schema:<br />
+                        {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;"students": [{ <br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"id": student integer id,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"name": optional student name string,<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"relationships": {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"otherStudentId":
+                        "Enemy" / "Friend" / "Neutral",<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"attributes": {<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"AttributeName":
+                        AttributeValueList<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br />
+                        &nbsp;&nbsp;&nbsp;&nbsp;}]<br />
+                        }
+                    </small>
+                    <textarea class="border rounded-2 w-100 text-muted mt-2"
+                        style="padding: 1rem; font-family: 'Inconsolata', monospace" rows="10"
+                        placeholder='Example:&#10;{&#10;  "teams": []&#10;}' id="students" hidden></textarea>
+                    <small id="num-students" hidden></small>
+                </div>
+
+                <div>
+                    <!-- Radio -->
+                    <div class="fw-bolder">Team Formation Algorithm</div>
+                    <div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="random" name="algorithm-radio"
+                                id="random-algorithm">
+                            <label class="form-check-label" for="random-algorithm">
+                                Random
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="weight" name="algorithm-radio"
+                                id="weight-algorithm">
+                            <label class="form-check-label" for="weight-algorithm">
+                                Weight
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="priority" name="algorithm-radio"
+                                id="priority-algorithm">
+                            <label class="form-check-label" for="priority-algorithm">
+                                Priority
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" value="social" name="algorithm-radio"
+                                id="social-algorithm">
+                            <label class="form-check-label" for="social-algorithm">
+                                Social
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="criteria-wrapper" hidden>
+                    <div id="criteria-title" class="fw-bolder" hidden>Team Formation Criteria</div>
+                    <div class="d-grid gap-2">
+                        <div id="criteria-match-project-requirements-wrapper" hidden>
+                            <label for="criteria-match-project-requirements">Match Project Requirements</label>
+                            <input type="text" id="criteria-match-project-requirements" class="form-control"
+                                placeholder='Examples: { "projects": [] }' />
+                        </div>
+                        <div id="criteria-set-parameter-weight-wrapper" hidden>
+                            <label for="criteria-set-parameter-weight">Set Parameter Weights</label>
+                            <input type="text" id="criteria-set-parameter-weight" class="form-control"
+                                placeholder='Examples: { "requirement_weight": 0, "social_weight": 0, "diversity_weight": 0, "preference_weight": 0 }' />
+                        </div>
+                        <div id="criteria-meet-diversity-constraints-wrapper" hidden>
+                            <label for="criteria-meet-diversity-constraints">Meet Diversity Constraints</label>
+                            <input type="text" id="criteria-meet-diversity-constraints" class="form-control"
+                                placeholder='Examples: { "diversify": [ "Gender", "Race" ], "concentrate": [ "Campus" ] }' />
+                        </div>
+                        <div id="criteria-priorities-wrapper" hidden>
+                            <label for="criteria-priorities">Priorities</label>
+                            <input type="text" id="criteria-priorities" class="form-control"
+                                placeholder='Examples: { "priorities": [ { "type": "tokenization",  "strategy": "diversify", "attribute_id": "Gender", "direction": "min_of", "value": 2, "threshold": 3 } ] }' />
+                        </div>
+                    </div>
+                </div>
+
+                <div>
+                    <div class="fw-bolder">Team Generation Options</div>
+                    <div>
+                        <label for="num-teams">Number of Teams</label>
+                        <input type="number" id="num-teams" name="num-teams" min="1"
+                            placeholder="Enter the total number of teams" class="form-control" />
+                    </div>
+                </div>
+
+                <div>
+                    <button class="btn btn-primary" type="button" id="run-button">
+                        Generate Team Set
+                    </button>
+                </div>
+            </div>
+        </section>
+        <section>
+            <div class="mt-4" id="result-team-set-wrapper" hidden>
+                <div class="fw-bold fs-5">Team Set</div>
+                <!-- A text area -->
+                <textarea id="result-team-set" class="border rounded-2 w-100 text-muted form-control"
+                    style="padding: 1rem; font-family: 'Inconsolata', monospace" rows="20" readonly>
+            </textarea>
+                <!-- Make a button at the top right of textarea for copy to clipboard -->
+                <button type="button" id="copy-to-clipboard" class="btn btn-primary mt-2">Copy to clipboard</button>
+                <button type="button" id="download-json" class="btn btn-primary mt-2">Download JSON</button>
+            </div>
+        </section>
+    </main>
+    <footer class="py-3">
+        <div class="container d-flex flex-column gap-4">
+            <div class="d-flex flex-row justify-content-between w-95">
+                <ul>
+                    <li><a href="about-us.html">About Us</a></li>
+                    <li><a href="#">Sponsors</a></li>
+                    <li><a href="research.html">Related Research</a></li>
+                </ul>
+                <ul>
+                    <li><a href="community.html">Our Community</a></li>
+                    <li><a href="support.html">Support Videos</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                </ul>
+                <p>Having trouble? Join our <a href="https://teamableanalytics.slack.com">Slack channel</a>.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+
+
+<script>
+    const baseUrl = "http://localhost:8000";
+    // const baseUrl = "https://api.teamableanalytics.ok.ubc.ca";
+    const teamFormationUrl = `${baseUrl}/api/generate/teams/`;
+    const OTHER_START_IDX = 100;
+
+    const mapOtherLevel1 = {
+        "1": "Gender",
+        "2": "GPA",
+        "4": "Ethnicity",
+    };
+    const mapOtherLevel2 = {
+        "1": {
+            "1": "Male",
+            "2": "Female",
+            "3": "Non-binary",
+            "4": "Other",
+            "5": "Prefer not to say",
+        },
+        "2": {
+            "1": "A",
+            "2": "B",
+            "3": "C",
+            "4": "D",
+            "5": "F",
+        },
+        "4": {
+            "1": "African",
+            "2": "European",
+            "3": "East Asian",
+            "4": "South Asian",
+            "5": "South East Asian",
+            "6": "First Nations / Indigenous",
+            "7": "Hispanic / Latin American",
+            "8": "Middle Eastern",
+            "9": "Other",
+        },
+    };
+    const relationshipMap = {
+        "friend": "Friend",
+        "default": "Neutral",
+        "enemy": "Enemy",
+    };
+    const mapBackRelationship = {
+        "1.1": "Enemy",
+        "-1": "Friend",
+        "0": "Neutral",
+    }
+
+    function sanitizeJson(json) {
+        const invalidChars = ["\n", "\t", "\r", " "];
+        const sanitizedJson = json.split('').filter(char => !invalidChars.includes(char)).join('');
+        return sanitizedJson;
+    }
+
+    function mapBackToOriginal(teamsetJson) {
+        const mappedBack = teamsetJson.teams.map((team) => {
+            const mappedStudents = team.students.map((student) => {
+                const studentAttributes = student["attributes"];
+                const newStudentAttributes = {};
+                Object.entries(studentAttributes).forEach(([attributeName, attributeValues]) => {
+                    const attributeNameIdx = mapOtherLevel1[attributeName];
+                    const transformedValues = attributeValues.map((value) => {
+                        return mapOtherLevel2[attributeName][value];
+                    });
+                    newStudentAttributes[attributeNameIdx] = transformedValues;
+                });
+
+                const newStudentRelationships = {};
+                Object.entries(student["relationships"]).forEach(([student_id, relationship]) => {
+                    newStudentRelationships[student_id] = mapBackRelationship[relationship.toString()];
+                });
+
+                return {
+                    ...student,
+                    "attributes": newStudentAttributes,
+                    "relationships": newStudentRelationships,
+                }
+            });
+            return {
+                ...team,
+                "students": mappedStudents,
+            }
+        });
+        return {
+            ...teamsetJson,
+            "teams": mappedBack,
+        }
+    }
+
+    function sendRequest(jsonBody) {
+        document.getElementById("run-button").disabled = true;
+        document.getElementById("run-button").innerHTML = "<span class='spinner-border spinner-border-sm' role='status' aria-hidden='true'></span>&nbsp;&nbsp;Generating Team Set"
+
+        const body = JSON.stringify(jsonBody);
+
+        fetch(teamFormationUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Api-Key": "CI4c69/IXGrczbtQYdfbjfoi+JjCXT1i54jzVQox8MA=",
+            },
+            body: body,
+        }).then((response) => {
+            if (!response.ok) {
+                throw new Error(response.statusText);
+            }
+            return response.json();
+        }).then((json) => {
+            const teamData = json["teams"];
+            const processedTeamData = mapBackToOriginal(teamData);
+            document.getElementById("result-team-set").value = JSON.stringify(processedTeamData, null, 2);
+            document.getElementById("result-team-set-wrapper").hidden = false;
+            document.getElementById("result-team-set").scrollIntoView({ behavior: "smooth" });
+            // console.log(JSON.stringify(teamData, null, 2));
+            // document.getElementById("demo-output-wrapper").hidden = false;
+        }).catch((e) => {
+            console.error(e);
+        }).finally(() => {
+            document.getElementById("run-button").disabled = false;
+            document.getElementById("run-button").innerHTML = "Generate Team Set";
+        })
+    }
+
+    function transformStudens(students) {
+        let currentLevel1Idx = OTHER_START_IDX;
+        const processedStudents = students.map((student) => {
+            const studentAttributes = student["attributes"]
+            const newStudentAttributes = {};
+            Object.entries(studentAttributes).forEach(([attributeName, attributeValues]) => {
+                const attributeNameIdx = Object.entries(mapOtherLevel1).find(([_, name]) => name === attributeName);
+                const currentIdx = !attributeNameIdx ? currentLevel1Idx : attributeNameIdx[0];
+                if (!attributeNameIdx) {
+                    currentLevel1Idx += 1;
+                    mapOtherLevel1[currentIdx] = attributeName;
+                    mapOtherLevel2[currentIdx] = {};
+                }
+
+                const transformedValues = attributeValues.map((value) => {
+                    const valueIdx = Object.entries(mapOtherLevel2[currentIdx]).find(([_, name]) => name === value);
+                    if (!!valueIdx) {
+                        return parseInt(valueIdx[0]);
+                    }
+                    const nextMaxKey = Math.max(...Object.keys(mapOtherLevel2[currentIdx]).map(Number), 0) + 1;
+                    mapOtherLevel2[currentIdx][nextMaxKey] = value;
+                    return nextMaxKey;
+                });
+                newStudentAttributes[currentIdx] = transformedValues;
+            });
+
+            const newStudentRelationships = {};
+            Object.entries(student["relationships"]).forEach(([student_id, relationship]) => {
+                const relationshipIdx = Object.entries(relationshipMap).find(([_, name]) => name === relationship);
+                if (!relationshipIdx) {
+                    throw new Error(`Invalid relationship found ${relationship}`);
+                }
+                newStudentRelationships[student_id] = relationshipIdx[0];
+            });
+
+            return {
+                ...student,
+                "attributes": newStudentAttributes,
+                "relationships": newStudentRelationships,
+            }
+        });
+
+        return processedStudents;
+    }
+
+    function transformConstraints(constraintsJson) {
+        const diversifyConstraints = constraintsJson["diversify"];
+        const transformedDiversifyConstraints = diversifyConstraints?.map((constraint) => {
+            const constraintIdx = Object.entries(mapOtherLevel1).find(([_, name]) => name === constraint);
+            if (!!constraintIdx) {
+                return parseInt(constraintIdx);
+            }
+            throw new Error(`Invalid diversify constraint found ${constraint}`);
+        }) ?? [];
+
+        const concentrateConstraints = constraintsJson["concentrate"];
+        const transformedConcentrateConstraints = concentrateConstraints.map((constraint) => {
+            const constraintIdx = Object.entries(mapOtherLevel1).find(([_, name]) => name === constraint);
+            if (!!constraintIdx) {
+                return parseInt(constraintIdx);
+            }
+            throw new Error(`Invalid concentrate constraint found ${constraint}`);
+        }) ?? [];
+
+        return {
+            "diversify": transformedDiversifyConstraints,
+            "concentrate": transformedConcentrateConstraints,
+        }
+    }
+
+    function setAllCriteriaHidden() {
+        document.getElementById("criteria-wrapper").hidden = true;
+        document.getElementById("criteria-title").hidden = true;
+        document.getElementById("criteria-match-project-requirements-wrapper").hidden = true;
+        document.getElementById("criteria-set-parameter-weight-wrapper").hidden = true;
+        document.getElementById("criteria-meet-diversity-constraints-wrapper").hidden = true;
+        document.getElementById("criteria-priorities-wrapper").hidden = true;
+    }
+
+    document.getElementById("random-algorithm").addEventListener("click", function () {
+        setAllCriteriaHidden();
+    });
+
+    document.getElementById("weight-algorithm").addEventListener("click", function () {
+        setAllCriteriaHidden();
+        document.getElementById("criteria-wrapper").hidden = false;
+        document.getElementById("criteria-title").hidden = false;
+        document.getElementById("criteria-set-parameter-weight-wrapper").hidden = false;
+        document.getElementById("criteria-meet-diversity-constraints-wrapper").hidden = false;
+    });
+
+    document.getElementById("social-algorithm").addEventListener("click", function () {
+        setAllCriteriaHidden();
+        document.getElementById("criteria-wrapper").hidden = false;
+        document.getElementById("criteria-title").hidden = false;
+        document.getElementById("criteria-meet-diversity-constraints-wrapper").hidden = false;
+    });
+
+    document.getElementById("priority-algorithm").addEventListener("click", function () {
+        setAllCriteriaHidden();
+        document.getElementById("criteria-wrapper").hidden = false;
+        document.getElementById("criteria-title").hidden = false;
+        document.getElementById("criteria-priorities-wrapper").hidden = false;
+    });
+
+    document.getElementById("run-button").addEventListener("click", handleRun);
+    function handleRun() {
+        // get the radio button value
+        const algorithm = document.querySelector('input[name="algorithm-radio"]:checked').value;
+        if (!algorithm) {
+            alert("Please select an algorithm");
+            return;
+        }
+        const allowedKeys = ["requirement_weight", "social_weight", "diversity_weight", "preference_weight"]
+        const parameterWeightsRaw = document.getElementById("criteria-set-parameter-weight").value;
+        const parameterWeights = !parameterWeightsRaw ? {} : JSON.parse(parameterWeightsRaw);
+        const algorithmOptions = { "max_project_preferences": 0, "algorithm_type": algorithm }
+        allowedKeys.forEach((allowedKey) => {
+            if (allowedKey in parameterWeights) {
+                algorithmOptions[allowedKey] = parameterWeights[allowedKey];
+            }
+        });
+
+        // Team Formation Options
+        const teamGenerationOptions = {}
+        const numTeams = document.getElementById("num-teams").value;
+        if (!numTeams) {
+            alert("Please fill in the number of teams");
+            return;
+        }
+        const numStudents = JSON.parse(document.getElementById("students").value)["students"].length;
+        const maxTeamSize = Math.ceil(numStudents / parseInt(numTeams));
+        const minTeamSize = Math.floor(numStudents / parseInt(numTeams));
+        teamGenerationOptions["max_team_size"] = parseInt(maxTeamSize);
+        teamGenerationOptions["min_team_size"] = parseInt(minTeamSize);
+        teamGenerationOptions["total_teams"] = parseInt(numTeams);
+        teamGenerationOptions["initial_teams"] = [];
+
+        const studentsRaw = JSON.parse(document.getElementById("students").value);
+        const tranformedStudents = transformStudens(studentsRaw["students"]);
+
+        const diversityConstaintsRaw = document.getElementById("criteria-meet-diversity-constraints").value;
+        const diversityConstaints = !diversityConstaintsRaw
+            ? { "diversify": [], "concentrate": [] }
+            : transformConstraints(JSON.parse(diversityConstaintsRaw));
+        algorithmOptions["attributes_to_diversify"] = diversityConstaints["diversify"];
+        algorithmOptions["attributes_to_concentrate"] = diversityConstaints["concentrate"];
+        
+
+        const requestBody = {
+            "students": tranformedStudents,
+            "algorithm_options": algorithmOptions,
+            "team_generation_options": teamGenerationOptions
+        }
+
+        sendRequest(requestBody);
+    }
+
+    document.getElementById("students-file").addEventListener("change", function () {
+        const file = this.files[0];
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const text = e.target.result;
+            const studentsJson = JSON.parse(text);
+            document.getElementById("students").value = JSON.stringify(studentsJson, null, 2);
+            document.getElementById("students").hidden = false;
+            if ("students" in studentsJson) {
+                document.getElementById("num-students").innerText = `You have ${studentsJson["students"].length} students in the class.`;
+                document.getElementById("num-students").hidden = false;
+            }
+            document.getElementById("students-helper").hidden = true;
+        };
+        reader.readAsText(file);
+    });
+
+
+
+    document.getElementById("copy-to-clipboard").addEventListener("click", copyResponseToClipboard);
+    function copyResponseToClipboard() {
+        const copyText = document.getElementById("result-team-set");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+    }
+
+    document.getElementById("download-json").addEventListener("click", downResponseAsJson);
+    function downResponseAsJson() {
+        const downloadElement = document.getElementById("result-team-set");
+        const contentJson = JSON.stringify(JSON.parse(downloadElement.value), null, 2);
+        const blob = new Blob([contentJson], { type: "application/json" });
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "team_set.json";
+        a.click();
+    }
+
+</script>
+
+</html>

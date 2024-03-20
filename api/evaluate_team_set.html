@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../css/bootstrap/v5.1.3/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../css/footer.css" rel="stylesheet">
+</head>
+
+<body>
+
+<header class="d-flex flex-row align-items-center p-3">
+    <div class="img-container">
+        <a href="../index.html"><img src="../assets/img/logo-transparent-blue.png"
+                                     alt="Teamable Analytics Logo"/></a>
+    </div>
+    <span class="title"><a href="../index.html">Teamable Analytics</a></span>
+</header>
+
+<main class="container d-flex flex-column gap-1 my-5">
+    <h1>Evaluation API</h1>
+
+    <section>
+
+        <div>
+            <label class="fw-bolder" for="team-set">Team Set</label>
+            <!-- Upload a file -->
+            <input type="file" id="team-set-file" class="form-control" accept=".json"/>
+            <small id="team-set-helper">
+                The file should be a JSON with the following schema:<br/>
+                {<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;"id": Optional team set id string<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;"name": Optional team set name string<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;"teams": []<br/>
+                }
+            </small>
+            <textarea
+                    class="border rounded-2 w-100 text-muted mt-2"
+                    style="padding: 1rem; font-family: 'Inconsolata', monospace"
+                    rows="10"
+                    placeholder='Example:&#10;{&#10;  "teams": []&#10;}'
+                    id="team-set" hidden></textarea>
+        </div>
+
+        <div class="mt-2">
+            <label class="fw-bolder" for="team-set">Metrics</label>
+            <div class="d-flex flex-column">
+
+                <label class="text-nowrap" for="avg-cosine-difference-metric">Intra-Heterogeneity</label>
+                <input class="form-control-sm w-100 border rounded-2 w-100 text-muted" type="text"
+                       id="avg-cosine-difference-metric"
+                       placeholder='Example: { "intra_heterogeneity": { "attribute_filter": [ "Gender", "Race" ] } }'>
+
+                <label class="text-nowrap mt-2" for="avg-cosine-similarity-metric">Inter-Homogeneity</label>
+                <input class="form-control-sm w-100 border rounded-2 w-100 text-muted" type="text"
+                       id="avg-cosine-similarity-metric"
+                       placeholder='Example: { "inter_homogeneity": { "attribute_filter": [ "Gender", "Race" ] } }'>
+
+                <label class="text-nowrap mt-2" for="avg-solo-status-metric">Solo Status</label>
+                <input class="form-control-sm w-100 border rounded-2 w-100 text-muted" type="text"
+                       id="avg-solo-status-metric"
+                       placeholder='Example: { "solo_status": { "minority_groups_map": { "Race": [ "Asian", "African" ], "GPA": [ "A" ] } } }'>
+
+                <label class="text-nowrap mt-2" for="common-time-availability-metric">Common Time Availability</label>
+                <input class="form-control-sm w-100 border rounded-2 w-100 text-muted" type="text"
+                       id="common-time-availability-metric"
+                       placeholder='Example: { "common_time_availability": { "timeslot_attribute_id": "Timeslots", "available_timeslots": [ "Tue 8-9am", "Tue 9-10am" ] } }'>
+
+                <div class="d-flex align-items-end justify-content-start gap-1">
+                    <div class="text-nowrap mt-2">Project Coverage</div>
+                    <small>(auto calculated when project requirements exist)</small>
+                </div>
+
+                <div class="d-flex align-items-end justify-content-start gap-1">
+                    <div class="text-nowrap mt-2">Social Satisfaction</div>
+                    <small>(auto calculated when student relationships exist)</small>
+                </div>
+            </div>
+        </div>
+
+        <button id="evaluate-btn" type="button" class="btn btn-primary mt-4">Evaluate Team Set</button>
+    </section>
+    <section>
+
+        <div class="mt-4" id="metrics-result-wrapper" hidden>
+            <div class="fw-bold fs-5">Evaluation</div>
+            <ul>
+                <li id="project_coverage-res" hidden></li>
+                <li id="social_satisfaction-res" hidden></li>
+                <li id="avg_cosine_difference-res" hidden></li>
+                <li id="avg_cosine_similarity-res" hidden></li>
+                <li id="avg_solo_status-res" hidden></li>
+                <li id="common_time_availability-res" hidden></li>
+            </ul>
+        </div>
+    </section>
+</main>
+
+<footer class="py-3">
+    <div class="container d-flex flex-column gap-4">
+        <div class="d-flex flex-row justify-content-between w-95">
+            <ul>
+                <li><a href="#">About Us</a></li>
+                <li><a href="../sponsors.html">Sponsors</a></li>
+                <li><a href="../research.html">Related Research</a></li>
+            </ul>
+            <ul>
+                <li><a href="../community.html">Our Community</a></li>
+                <li><a href="../support.html">Support Videos</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+            </ul>
+            <p>Having trouble? Join our <a href="https://teamableanalytics.slack.com">Slack channel</a>.</p>
+        </div>
+    </div>
+</footer>
+
+<script>
+    const OTHER_START_IDX = 100;
+    const baseUrl = "http://localhost:8000";
+    const evaluateTeamSetUrl = `${baseUrl}/api/evaluate/team_set/`;
+
+    const mapOtherLevel1 = {
+        "1": "Gender",
+        "2": "GPA",
+        "4": "Ethnicity",
+    };
+    const mapOtherLevel2 = {
+        "1": {
+            "1": "Male",
+            "2": "Female",
+            "3": "Non-binary",
+            "4": "Other",
+            "5": "Prefer not to say",
+        },
+        "2": {
+            "1": "A",
+            "2": "B",
+            "3": "C",
+            "4": "D",
+            "5": "F",
+        },
+        "4": {
+            "1": "African",
+            "2": "European",
+            "3": "East Asian",
+            "4": "South Asian",
+            "5": "South East Asian",
+            "6": "First Nations / Indigenous",
+            "7": "Hispanic / Latin American",
+            "8": "Middle Eastern",
+            "9": "Other",
+        },
+    };
+    const relationshipMap = {
+        "friend": "Friend",
+        "default": "Neutral",
+        "enemy": "Enemy",
+    };
+
+    function sanitizeJson(json) {
+        const invalidChars = ["\n", "\t", "\r"];
+        return json.split('').filter(char => !invalidChars.includes(char)).join('');
+    }
+
+    const avg_cosine_difference_metric_inp = document.getElementById('avg-cosine-difference-metric');
+    avg_cosine_difference_metric_inp.addEventListener('change', () => {
+        try {
+            if (avg_cosine_difference_metric_inp.value === "") {
+                return;
+            }
+            avg_cosine_difference_metric_inp.value = JSON.stringify(JSON.parse(sanitizeJson(avg_cosine_difference_metric_inp.value)));
+        } catch (e) {
+            console.error(e);
+            alert("Invalid JSON");
+        }
+    })
+
+    const avg_cosine_similarity_metric_inp = document.getElementById('avg-cosine-similarity-metric');
+    avg_cosine_similarity_metric_inp.addEventListener('change', () => {
+        try {
+            if (avg_cosine_similarity_metric_inp.value === "") {
+                return;
+            }
+            avg_cosine_similarity_metric_inp.value = JSON.stringify(JSON.parse(sanitizeJson(avg_cosine_similarity_metric_inp.value)));
+        } catch (e) {
+            console.error(e);
+            alert("Invalid JSON");
+        }
+    })
+
+    const avg_solo_status_metric_inp = document.getElementById('avg-solo-status-metric');
+    avg_solo_status_metric_inp.addEventListener('change', () => {
+        try {
+            if (avg_solo_status_metric_inp.value === "") {
+                return;
+            }
+            avg_solo_status_metric_inp.value = JSON.stringify(JSON.parse(sanitizeJson(avg_solo_status_metric_inp.value)));
+        } catch (e) {
+            console.error(e);
+            alert("Invalid JSON");
+        }
+    })
+
+    const common_time_availability_metric_inp = document.getElementById('common-time-availability-metric');
+    common_time_availability_metric_inp.addEventListener('change', () => {
+        try {
+            if (common_time_availability_metric_inp.value === "") {
+                return;
+            }
+            common_time_availability_metric_inp.value = JSON.stringify(JSON.parse(sanitizeJson(common_time_availability_metric_inp.value)));
+        } catch (e) {
+            console.error(e);
+            alert("Invalid JSON");
+        }
+    })
+
+    function transformTeamSetStudents(teamSetJson) {
+        let currentLevel1Idx = OTHER_START_IDX;
+        const students = teamSetJson.teams.map(team => team.students).flat();
+        students.forEach(student => {
+            const studentAttributes = student.attributes;
+            Object.entries(studentAttributes).map(([attributeName, attributeValues]) => {
+                const attributeNameIdx = Object.entries(mapOtherLevel1).find(([_, value]) => value === attributeName);
+                const attributeNameKey = !!attributeNameIdx ? attributeNameIdx[0] : currentLevel1Idx;
+                if (attributeNameKey === currentLevel1Idx) {
+                    mapOtherLevel1[attributeNameKey] = attributeName;
+                    currentLevel1Idx += 1;
+                }
+                if (!(attributeNameKey in mapOtherLevel2)) {
+                    mapOtherLevel2[attributeNameKey] = {};
+                }
+                attributeValues.forEach((attributeValue) => {
+                    const nextMaxKey = Math.max(...Object.keys(mapOtherLevel2[attributeNameKey]).map(Number), 0) + 1;
+                    const attributeValueIdx = Object.entries(mapOtherLevel2[attributeNameKey]).find(([_, value]) => value === attributeValue);
+                    if (!attributeValueIdx) {
+                        mapOtherLevel2[attributeNameKey][nextMaxKey] = attributeValue;
+                    }
+                });
+            });
+        });
+
+        const modifiedTeams = teamSetJson.teams.map(team => {
+            return {
+                ...team,
+                students: team.students.map(student => {
+                    const studentAttributes = student.attributes;
+                    const newStudentAttributes = {};
+                    Object.entries(studentAttributes).map(([attributeName, attributeValues]) => {
+                        const attributeNameIdx = Object.entries(mapOtherLevel1).find(([_, value]) => value === attributeName);
+                        const attributeNameKey = !!attributeNameIdx ? attributeNameIdx[0] : currentLevel1Idx;
+                        newStudentAttributes[attributeNameKey] = attributeValues.map(attributeValue => {
+                            const attributeValueIdx = Object.entries(mapOtherLevel2[attributeNameKey]).find(([_, value]) => value === attributeValue);
+                            if (!attributeValueIdx) {
+                                throw new Error(`Attribute value ${attributeValue} does not exist`);
+                            }
+                            return parseInt(attributeValueIdx[0]);
+                        });
+                    });
+
+                    const studentRelationships = {};
+                    Object.entries(student.relationships).forEach(([studentId, relationship]) => {
+                        const relationshipNumber = Object.entries(relationshipMap).find(([_, value]) => value === relationship);
+                        if (!relationshipNumber) {
+                            throw new Error(`Relationship ${relationship} does not exist`);
+                        }
+                        studentRelationships[studentId] = relationshipNumber[0];
+                    });
+
+                    return {
+                        ...student,
+                        attributes: newStudentAttributes,
+                        relationships: studentRelationships,
+                    }
+                }),
+            }
+        });
+
+        return {
+            ...teamSetJson,
+            teams: modifiedTeams,
+        }
+    }
+
+    function transformConsineParams(json) {
+        const attributeFilter = json.attribute_filter;
+        const transformedAttributeFilter = attributeFilter.map(attribute => {
+            const attributeNameIdx = Object.entries(mapOtherLevel1).find(([_, value]) => value === attribute);
+            if (!attributeNameIdx) {
+                throw new Error(`Attribute ${attribute} does not exist`);
+            }
+            return parseInt(attributeNameIdx[0]);
+        });
+        return {
+            attribute_filter: transformedAttributeFilter,
+        }
+    }
+
+    function transformSoloStatusParams(json) {
+        const minorityGroupsMap = json.minority_groups_map;
+        const transformedMinorityGroupsMap = {};
+        Object.entries(minorityGroupsMap).forEach(([attribute, values]) => {
+            const attributeNameIdx = Object.entries(mapOtherLevel1).find(([_, value]) => value === attribute);
+            if (!attributeNameIdx) {
+                throw new Error(`Attribute ${attribute} does not exist`);
+            }
+
+            transformedMinorityGroupsMap[parseInt(attributeNameIdx[0])] = values.map(value => {
+                const attributeValueIdx = Object.entries(mapOtherLevel2[attributeNameIdx[0]]).find(([_, value]) => value === value);
+                if (!attributeValueIdx) {
+                    throw new Error(`Attribute value ${value} does not exist`);
+                }
+                return parseInt(attributeValueIdx[0]);
+            });
+        });
+        return {
+            minority_groups_map: transformedMinorityGroupsMap,
+        }
+    }
+
+    function transformCommonTimeAvailabilityParams(json) {
+        const timeslotAttributeId = json.timeslot_attribute_id;
+        const availableTimeslots = json.available_timeslots;
+
+        const timeslotAttributeIdKey = Object.entries(mapOtherLevel1).find(([_, value]) => value === timeslotAttributeId.toString())[0];
+        if (!timeslotAttributeIdKey) {
+            throw new Error(`Timeslot attributes ${timeslotAttributeId} does not exist`);
+        }
+
+        const transformedAvailableTimeslots = availableTimeslots.map(timeslot => {
+            const timeslotIdx = Object.entries(mapOtherLevel2[timeslotAttributeIdKey]).find(([_, value]) => value === timeslot);
+            if (!timeslotIdx) {
+                throw new Error(`Timeslot ${timeslot} does not exist`);
+            }
+            return parseInt(timeslotIdx[0]);
+        });
+
+        return {
+            timeslot_attribute_id: parseInt(timeslotAttributeIdKey),
+            available_timeslots: transformedAvailableTimeslots,
+        }
+    }
+
+    document.getElementById('evaluate-btn').addEventListener('click', handleSubmit);
+
+    function handleSubmit() {
+        const metricList = {
+            "project_coverage": {},
+            "social_satisfaction": {},
+            "avg_cosine_difference": {},
+            "avg_cosine_similarity": {},
+            "avg_solo_status": {},
+            "common_time_availability": {},
+        }
+        const teamSetJson = JSON.parse(sanitizeJson(document.getElementById('team-set').value));
+        const transformedTeamSet = transformTeamSetStudents(teamSetJson);
+        if (avg_cosine_difference_metric_inp.value !== "") {
+            const avg_cosine_difference_metric_json = JSON.parse(sanitizeJson(avg_cosine_difference_metric_inp.value));
+            metricList["avg_cosine_difference"] = transformConsineParams(avg_cosine_difference_metric_json["intra_heterogeneity"]);
+        }
+        if (avg_cosine_similarity_metric_inp.value !== "") {
+            const avg_cosine_similarity_metric_json = JSON.parse(sanitizeJson(avg_cosine_similarity_metric_inp.value));
+            metricList["avg_cosine_similarity"] = transformConsineParams(avg_cosine_similarity_metric_json["inter_homogeneity"]);
+        }
+        if (avg_solo_status_metric_inp.value !== "") {
+            const avg_solo_status_metric_json = JSON.parse(sanitizeJson(avg_solo_status_metric_inp.value));
+            metricList["avg_solo_status"] = transformSoloStatusParams(avg_solo_status_metric_json["solo_status"]);
+        }
+        if (common_time_availability_metric_inp.value !== "") {
+            const common_time_availability_metric_json = JSON.parse(sanitizeJson(common_time_availability_metric_inp.value));
+            metricList["common_time_availability"] = transformCommonTimeAvailabilityParams(common_time_availability_metric_json["common_time_availability"]);
+        }
+
+        const requestBody = {
+            "team_set": transformedTeamSet,
+            "metrics": metricList,
+        }
+
+        fetch(evaluateTeamSetUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Api-Key": "CI4c69/IXGrczbtQYdfbjfoi+JjCXT1i54jzVQox8MA=",
+            },
+            body: JSON.stringify(requestBody),
+        }).then((res) => {
+            if (!res.ok) {
+                throw new Error(res.statusText);
+            }
+            return res.json();
+        }).then((json) => {
+            if (json["metric_evaluations"]["project_coverage"]) {
+                document.getElementById('project_coverage-res').innerText = `Project Coverage: ${json["metric_evaluations"]["project_coverage"]}`;
+                document.getElementById('project_coverage-res').hidden = false;
+            }
+            if (json["metric_evaluations"]["social_satisfaction"]) {
+                document.getElementById('social_satisfaction-res').innerText = `Social Satisfaction: ${json["metric_evaluations"]["social_satisfaction"]}`;
+                document.getElementById('social_satisfaction-res').hidden = false;
+            }
+            if (json["metric_evaluations"]["avg_cosine_difference"]) {
+                document.getElementById('avg_cosine_difference-res').innerText = `Intra-Heterogeneity: ${json["metric_evaluations"]["avg_cosine_difference"]}`;
+                document.getElementById('avg_cosine_difference-res').hidden = false;
+            }
+            if (json["metric_evaluations"]["avg_cosine_similarity"]) {
+                document.getElementById('avg_cosine_similarity-res').innerText = `Inter-Homogeneity: ${json["metric_evaluations"]["avg_cosine_similarity"]}`;
+                document.getElementById('avg_cosine_similarity-res').hidden = false;
+            }
+            if (json["metric_evaluations"]["avg_solo_status"]) {
+                document.getElementById('avg_solo_status-res').innerText = `Solo Status: ${json["metric_evaluations"]["avg_solo_status"]}`;
+                document.getElementById('avg_solo_status-res').hidden = false;
+            }
+            if (json["metric_evaluations"]["common_time_availability"]) {
+                document.getElementById('common_time_availability-res').innerText = `Common Time Availability: ${json["metric_evaluations"]["common_time_availability"]}`;
+                document.getElementById('common_time_availability-res').hidden = false;
+            }
+
+            document.getElementById('metrics-result-wrapper').hidden = false;
+            document.getElementById('metrics-result-wrapper').scrollIntoView({behavior: 'smooth'});
+        }).catch((e) => {
+            console.error(e);
+        });
+    }
+
+
+    document.getElementById("team-set-file").addEventListener("change", function () {
+        const file = this.files[0];
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            const contents = e.target.result;
+            document.getElementById('team-set').value = JSON.stringify(JSON.parse(sanitizeJson(contents)), null, 2);
+            document.getElementById('team-set').hidden = false;
+            document.getElementById('team-set-helper').hidden = true;
+        };
+        reader.readAsText(file);
+    });
+</script>
+</body>
+</html>

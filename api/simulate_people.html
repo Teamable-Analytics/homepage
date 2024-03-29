@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title></title>
+    <meta name="author" content="">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="../css/bootstrap/v5.1.3/bootstrap.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+
+    <link href="../css/styles.css" rel="stylesheet">
+    <link href="../css/footer.css" rel="stylesheet">
+</head>
+
+<body>
+<header class="d-flex flex-row align-items-center p-3">
+    <div class="img-container">
+        <a href="../index.html"><img src="../assets/img/logo-transparent-blue.png"
+                                     alt="Teamable Analytics Logo"/></a>
+    </div>
+    <span class="title"><a href="../index.html">Teamable Analytics</a></span>
+</header>
+
+<main class="container d-flex flex-column gap-1 my-5">
+    <h1 class="mb-2">Class Composition API</h1>
+    <section>
+        <div>
+            <div class="form-group">
+                <label class="fw-bold fs-5" for="class-size">Class Size</label>
+                <input type="number" id="class-size" name="class-size" min="1"
+                       placeholder="Enter the number of students in the class" class="form-control"/>
+
+            </div>
+            <div class="row mb-2 mt-2">
+                <div class="col">
+                    <label class="fw-bold fs-5" for="num-friends">Number of Friends</label>
+                    <input type="number" id="num-friends" name="num-friends" min="1"
+                           placeholder="Enter the number of friends each student has" class="form-control"/>
+                </div>
+                <div class="col">
+                    <label class="fw-bold fs-5" for="num-enemies">Number of Enemies</label>
+                    <input type="number" id="num-enemies" name="num-enemies" min="1"
+                           placeholder="Enter the number of enemies each student has" class="form-control"/>
+                </div>
+            </div>
+            <div>
+                <div class="fw-bold fs-5 mt-2">Diversity Attributes</div>
+                <!-- 2 columns, use grid, both start at the begining of their box -->
+                <div class="container">
+                    <div class="row mb-2">
+                        <div class="col">
+                            <div>
+                                <div class="mb-2">
+                                    <div class="fw-bold" style="margin-bottom: -0.25rem;">Gender</div>
+                                    <small>Optional if left blank</small>
+                                </div>
+                                <div class="d-flex flex-column gap-2">
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <label for="gender-female"></label>
+                                        <input type="number" id="gender-female" name="gender-female" min="0" max="100"
+                                               step="1" required class="form-control w-25"/>
+                                        <div>%</div>
+                                        <div>Female</div>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <label for="gender-male"></label>
+                                        <input type="number" id="gender-male" name="gender-male" min="0" max="100"
+                                               step="1" required class="form-control w-25"/>
+                                        <div>%</div>
+                                        <div>Male</div>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <label for="gender-non-binary"></label>
+                                        <input type="number" id="gender-non-binary" name="gender-non-binary" min="0"
+                                               max="100" step="1" required class="form-control w-25"/>
+                                        <div>%</div>
+                                        <div>Non-binary</div>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <label for="gender-other"></label>
+                                        <input type="number" id="gender-other" name="gender-other" min="0" max="100"
+                                               step="1" required class="form-control w-25"/>
+                                        <div>%</div>
+                                        <div>Other</div>
+                                    </div>
+                                    <div class="d-flex gap-2 align-items-center">
+                                        <label for="gender-unknown"></label>
+                                        <input type="number" id="gender-unknown" name="gender-unknown" min="0" max="100"
+                                               step="1" required class="form-control w-25"/>
+                                        <div>%</div>
+                                        <div>Prefer not to say</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="mt-4">
+                                <div class="mb-2">
+                                    <div class="fw-bold" style="margin-bottom: -0.25rem;">Other</div>
+                                    <small>Optional if not uploaded</small>
+                                </div>
+                                <div class="d-flex flex-column">
+                                    <input type="file" id="other-attribute-inp" accept="json"/>
+                                    <small id="other-help" class="form-text text-muted">
+                                        You can upload custom attributes through a JSON file<br/>
+                                        The data has to be in the following format:<br/>
+                                        {<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;"AttributeName": {<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Value1": percentage (0 -
+                                        100),<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Value2": percentage (0 -
+                                        100),<br/>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+                                        }
+
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-2">
+                                <div class="fw-bold" style="margin-bottom: -0.25rem;">GPA</div>
+                                <small>Optional if left blank</small>
+                            </div>
+                            <div class="d-flex flex-column gap-2">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label for="gpa-a"></label>
+                                    <input type="number" id="gpa-a" name="gpa-a" min="0" max="100" step="1" required
+                                           class="form-control w-25"/>
+                                    <div>%</div>
+                                    <div>A</div>
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label for="gpa-b"></label>
+                                    <input type="number" id="gpa-b" name="gpa-b" min="0" max="100" step="1" required
+                                           class="form-control w-25"/>
+                                    <div>%</div>
+                                    <div>B</div>
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label for="gpa-c"></label>
+                                    <input type="number" id="gpa-c" name="gpa-c" min="0" max="100" step="1" required
+                                           class="form-control w-25"/>
+                                    <div>%</div>
+                                    <div>C</div>
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label for="gpa-d"></label>
+                                    <input type="number" id="gpa-d" name="gpa-d" min="0" max="100" step="1" required
+                                           class="form-control w-25"/>
+                                    <div>%</div>
+                                    <div>D</div>
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label for="gpa-f"></label>
+                                    <input type="number" id="gpa-f" name="gpa-f" min="0" max="100" step="1" required
+                                           class="form-control w-25"/>
+                                    <div>%</div>
+                                    <div>F</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col">
+                            <div class="mb-2">
+                                <div class="fw-bold" style="margin-bottom: -0.25rem;">Ethnicity</div>
+                                <small>Optional if left blank</small>
+                            </div>
+                            <div class="d-flex flex-column gap-2">
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label for="ethnicity-african"></label>
+                                    <input type="number" id="ethnicity-african" name="ethnicity-african" min="0"
+                                           max="100" step="1" required class="form-control w-25"/>
+                                    <div>%</div>
+                                    <div>African</div>
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label for="ethnicity-european"></label>
+                                    <input type="number" id="ethnicity-european" name="geethnicitynder-european" min="0"
+                                           max="100" step="1" required class="form-control w-25"/>
+                                    <div>%</div>
+                                    <div>European</div>
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label for="ethnicity-east-asian"></label>
+                                    <input type="number" id="ethnicity-east-asian" name="ethnicity-east-asian" min="0"
+                                           max="100" step="1" required class="form-control w-25"/>
+                                    <div>%</div>
+                                    <div>East Asian</div>
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label for="ethnicity-south-asian"></label>
+                                    <input type="number" id="ethnicity-south-asian" name="ethnicity-south-asian" min="0"
+                                           max="100" step="1" required class="form-control w-25"/>
+                                    <div>%</div>
+                                    <div>South Asian</div>
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label for="ethnicity-south-east-asian"></label>
+                                    <input type="number" id="ethnicity-south-east-asian"
+                                           name="ethnicity-south-east-asian" min="0" max="100" step="1" required
+                                           class="form-control w-25"/>
+                                    <div>%</div>
+                                    <div>South East Asian</div>
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label for="ethnicity-first-nation-or-indigenous"></label>
+                                    <input type="number" id="ethnicity-first-nation-or-indigenous"
+                                           name="ethnicity-first-nation-or-indigenous" min="0" max="100" step="1"
+                                           required class="form-control w-25"/>
+                                    <div>%</div>
+                                    <div>First Nations / Indigenous</div>
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label for="ethnicity-hispanic-or-latin-american"></label>
+                                    <input type="number" id="ethnicity-hispanic-or-latin-american"
+                                           name="ethnicity-hispanic-or-latin-american" min="0" max="100" step="1"
+                                           required class="form-control w-25"/>
+                                    <div>%</div>
+                                    <div>Hispanic / Latin American</div>
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label for="ethnicity-middle-eastern"></label>
+                                    <input type="number" id="ethnicity-middle-eastern" name="ethnicity-middle-eastern"
+                                           min="0" max="100" step="1" required class="form-control w-25"/>
+                                    <div>%</div>
+                                    <div>Middle Eastern</div>
+                                </div>
+                                <div class="d-flex gap-2 align-items-center">
+                                    <label for="ethnicity-other"></label>
+                                    <input type="number" id="ethnicity-other" name="ethnicity-other" min="0" max="100"
+                                           step="1" required class="form-control w-25"/>
+                                    <div>%</div>
+                                    <div>Other</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button id="submit-button" type="button" class="btn btn-primary">Generate Synthetic Class of Students
+            </button>
+        </div>
+    </section>
+    <section>
+        <div class="mt-4" id="result-students-wrapper" hidden>
+            <label class="fw-bold fs-5" for="result-students">Class composition</label>
+            <!-- A text area -->
+            <textarea
+                    id="result-students"
+                    class="border rounded-2 w-100 text-muted form-control"
+                    style="padding: 1rem; font-family: 'Inconsolata', monospace"
+                    rows="20"
+                    readonly>
+            </textarea>
+            <!-- Make a button at the top right of textarea for copy to clipboard -->
+            <button type="button" id="copy-to-clipboard" class="btn btn-primary mt-2">Copy to clipboard</button>
+            <button type="button" id="download-json" class="btn btn-primary mt-2">Download JSON</button>
+        </div>
+    </section>
+</main>
+<footer class="py-3">
+    <div class="container d-flex flex-column gap-4">
+        <div class="d-flex flex-row justify-content-between w-95">
+            <ul>
+                <li><a href="../about-us.html">About Us</a></li>
+                <li><a href="#">Sponsors</a></li>
+                <li><a href="../research.html">Related Research</a></li>
+            </ul>
+            <ul>
+                <li><a href="../community.html">Our Community</a></li>
+                <li><a href="../support.html">Support Videos</a></li>
+                <li><a href="../faq.html">FAQ</a></li>
+            </ul>
+            <p>Having trouble? Join our <a href="https://teamableanalytics.slack.com">Slack channel</a>.</p>
+        </div>
+    </div>
+</footer>
+</body>
+
+
+<script type="module">
+    import {faker} from 'https://esm.sh/@faker-js/faker';
+
+    const OTHER_START_IDX = 100;
+
+    // const baseUrl = "https://api.teamableanalytics.ok.ubc.ca";
+    const baseUrl = "http://localhost:8000";
+    const generateClassUrl = `${baseUrl}/api/simulate/people/`;
+    const mapOtherLevel1 = {
+        "1": "Gender",
+        "2": "GPA",
+        "4": "Ethnicity",
+    };
+    const mapOtherLevel2 = {
+        "1": {
+            "1": "Male",
+            "2": "Female",
+            "3": "Non-binary",
+            "4": "Other",
+            "5": "Prefer not to say",
+        },
+        "2": {
+            "1": "A",
+            "2": "B",
+            "3": "C",
+            "4": "D",
+            "5": "F",
+        },
+        "4": {
+            "1": "African",
+            "2": "European",
+            "3": "East Asian",
+            "4": "South Asian",
+            "5": "South East Asian",
+            "6": "First Nations / Indigenous",
+            "7": "Hispanic / Latin American",
+            "8": "Middle Eastern",
+            "9": "Other",
+        },
+    };
+    const relationshipMap = {
+        "-1": "Friend",
+        "1.1": "Enemy",
+    };
+
+    document.getElementById("submit-button").addEventListener("click", handleSubmit);
+
+    function transformResponse(res) {
+        const {students} = res;
+        return students.map(student => {
+            const newStudent = {...student};
+            newStudent["name"] = faker.person.fullName();
+            newStudent["attributes"] = mapIntToText(student["attributes"]);
+            const newRelationships = {};
+            if (newStudent["relationships"]) {
+                Object.entries(newStudent["relationships"]).forEach(([key, value]) => {
+                    newRelationships[key] = relationshipMap[value]
+                });
+            }
+            newStudent["relationships"] = newRelationships;
+            return newStudent;
+        })
+    }
+
+    function mapTextToInt(jsonContent) {
+        let currentLevel1Idx = OTHER_START_IDX;
+        Object.entries(jsonContent).forEach(([key, value]) => {
+            mapOtherLevel1[currentLevel1Idx] = key;
+            mapOtherLevel2[currentLevel1Idx] = {};
+            Object.entries(value).forEach(([key2, value2], idx) => {
+                mapOtherLevel2[currentLevel1Idx][idx + 1] = key2;
+            });
+            currentLevel1Idx++;
+        });
+    }
+
+    function mapIntToText(jsonContent) {
+        const newJson = {};
+        Object.entries(jsonContent).forEach(([key, value]) => {
+            const level1Text = mapOtherLevel1[key];
+            newJson[level1Text] = [];
+            value.forEach((v) => {
+                newJson[level1Text].push(mapOtherLevel2[key][v]);
+            });
+        });
+        return newJson;
+    }
+
+    document.getElementById("copy-to-clipboard").addEventListener("click", copyResponseToClipboard);
+
+    function copyResponseToClipboard() {
+        const copyText = document.getElementById("result-students");
+        copyText.select();
+        copyText.setSelectionRange(0, 99999);
+        document.execCommand("copy");
+    }
+
+    document.getElementById("download-json").addEventListener("click", downResponseAsJson);
+
+    function downResponseAsJson() {
+        const downloadElement = document.getElementById("result-students");
+        const contentJson = JSON.stringify(JSON.parse(downloadElement.value), null, 2);
+        const blob = new Blob([contentJson], {type: "application/json"});
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        a.href = url;
+        a.download = "class_composition.json";
+        a.click();
+    }
+
+    function sendRequest(attributeRangesJson) {
+        document.getElementById("result-students-wrapper").hidden = true;
+
+        const numFriends = parseInt(document.getElementById("num-friends").value);
+        const numEnemies = parseInt(document.getElementById("num-enemies").value);
+
+        const requestBody = {
+            "class_size": parseInt(document.getElementById("class-size").value),
+            "attribute_ranges": attributeRangesJson,
+        }
+        if (numFriends > 0) {
+            requestBody["number_of_friends"] = numFriends;
+        }
+        if (numEnemies > 0) {
+            requestBody["number_of_enemies"] = numEnemies;
+        }
+
+        fetch(generateClassUrl, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-Api-Key": "CI4c69/IXGrczbtQYdfbjfoi+JjCXT1i54jzVQox8MA=",
+            },
+            body: JSON.stringify(requestBody),
+        }).then(async (res) => {
+            if (res.ok) {
+                const data = await res.json();
+                const studentData = transformResponse(data);
+                document.getElementById("result-students").value = JSON.stringify({"students": studentData}, null, 2);
+                document.getElementById("result-students-wrapper").hidden = false;
+                document.getElementById("result-students-wrapper").scrollIntoView({behavior: "smooth"});
+            } else {
+                const data = await res.json();
+                console.error("Error: " + data.error);
+                alert("Error: " + data.error);
+            }
+        }).finally(() => {
+            document.getElementById("submit-button").disabled = false;
+        })
+    }
+
+    function handleSubmit() {
+        document.getElementById("submit-button").disabled = true;
+
+        const attributeRangesJson = {};
+
+        // Gender
+        if (!(document.getElementById("gender-female").value === '' && document.getElementById('gender-male').value === '' && document.getElementById('gender-non-binary').value === '' && document.getElementById('gender-other').value === '' && document.getElementById('gender-unknown').value === '')) {
+            const genderFemale = parseInt(document.getElementById("gender-female").value);
+            const genderMale = parseInt(document.getElementById("gender-male").value);
+            const genderNonBinary = parseInt(document.getElementById("gender-non-binary").value);
+            const genderOther = parseInt(document.getElementById("gender-other").value);
+            const genderUnknown = parseInt(document.getElementById("gender-unknown").value);
+
+            attributeRangesJson["1"] = {
+                "1": isNaN(genderMale) ? 0 : genderMale / 100,
+                "2": isNaN(genderFemale) ? 0 : genderFemale / 100,
+                "3": isNaN(genderNonBinary) ? 0 : genderNonBinary / 100,
+                "4": isNaN(genderOther) ? 0 : genderOther / 100,
+                "5": isNaN(genderUnknown) ? 0 : genderUnknown / 100,
+            }
+        }
+
+        // GPA
+        if (!(document.getElementById("gpa-a").value === '' && document.getElementById('gpa-b').value === '' && document.getElementById('gpa-c').value === '' && document.getElementById('gpa-d').value === '' && document.getElementById('gpa-f').value === '')) {
+            const gpaA = parseInt(document.getElementById("gpa-a").value);
+            const gpaB = parseInt(document.getElementById("gpa-b").value);
+            const gpaC = parseInt(document.getElementById("gpa-c").value);
+            const gpaD = parseInt(document.getElementById("gpa-d").value);
+            const gpaF = parseInt(document.getElementById("gpa-f").value);
+
+            attributeRangesJson["2"] = {
+                "1": isNaN(gpaA) ? 0 : gpaA / 100,
+                "2": isNaN(gpaB) ? 0 : gpaB / 100,
+                "3": isNaN(gpaC) ? 0 : gpaC / 100,
+                "4": isNaN(gpaD) ? 0 : gpaD / 100,
+                "5": isNaN(gpaF) ? 0 : gpaF / 100
+            }
+        }
+
+        // Ethnicity
+        if (!(document.getElementById("ethnicity-african").value === '' && document.getElementById("ethnicity-european").value === '' && document.getElementById("ethnicity-east-asian").value === '' && document.getElementById("ethnicity-south-asian").value === '' && document.getElementById("ethnicity-south-east-asian").value === '' && document.getElementById("ethnicity-first-nation-or-indigenous").value === '' && document.getElementById("ethnicity-hispanic-or-latin-american").value === '' && document.getElementById("ethnicity-middle-eastern").value === '' && document.getElementById("ethnicity-other").value === '')) {
+            const ethnicityAfrican = parseInt(document.getElementById("ethnicity-african").value);
+            const ethnicityEuropean = parseInt(document.getElementById("ethnicity-european").value);
+            const ethnicityEastAsian = parseInt(document.getElementById("ethnicity-east-asian").value);
+            const ethnicitySouthAsian = parseInt(document.getElementById("ethnicity-south-asian").value);
+            const ethnicitySouthEastAsian = parseInt(document.getElementById("ethnicity-south-east-asian").value);
+            const ethnicityFirstNationOrIndigenous = parseInt(document.getElementById("ethnicity-first-nation-or-indigenous").value);
+            const ethnicityHispanicOrLatinAmerican = parseInt(document.getElementById("ethnicity-hispanic-or-latin-american").value);
+            const ethnicityMiddleEastern = parseInt(document.getElementById("ethnicity-middle-eastern").value);
+            const ethnicityOther = parseInt(document.getElementById("ethnicity-other").value);
+
+            attributeRangesJson["4"] = {
+                "1": isNaN(ethnicityAfrican) ? 0 : ethnicityAfrican / 100,
+                "2": isNaN(ethnicityEuropean) ? 0 : ethnicityEuropean / 100,
+                "3": isNaN(ethnicityEastAsian) ? 0 : ethnicityEastAsian / 100,
+                "4": isNaN(ethnicitySouthAsian) ? 0 : ethnicitySouthAsian / 100,
+                "5": isNaN(ethnicitySouthEastAsian) ? 0 : ethnicitySouthEastAsian / 100,
+                "6": isNaN(ethnicityFirstNationOrIndigenous) ? 0 : ethnicityFirstNationOrIndigenous / 100,
+                "7": isNaN(ethnicityHispanicOrLatinAmerican) ? 0 : ethnicityHispanicOrLatinAmerican / 100,
+                "8": isNaN(ethnicityMiddleEastern) ? 0 : ethnicityMiddleEastern / 100,
+                "9": isNaN(ethnicityOther) ? 0 : ethnicityOther / 100
+            }
+        }
+
+        // Other
+        // load the file
+        const file = document.getElementById("other-attribute-inp").files[0];
+        if (file) {
+            // get content of file
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                const fileContent = JSON.parse(e.target.result);
+                mapTextToInt(fileContent);
+                Object.entries(fileContent).forEach(([key, value]) => {
+                    // Loop through each of the level 1 map and compare key and level 1 map value to find 1
+                    const level1Idx = Object.keys(mapOtherLevel1).find(key1 => mapOtherLevel1[key1] === key);
+                    attributeRangesJson[level1Idx] = {};
+                    Object.entries(value).forEach(([key2, value2]) => {
+                        const level2Idx = Object.keys(mapOtherLevel2[level1Idx]).find(key3 => mapOtherLevel2[level1Idx][key3] === key2);
+                        attributeRangesJson[level1Idx][level2Idx] = parseInt(value2) / 100;
+                    });
+                });
+
+                sendRequest(attributeRangesJson);
+            }
+            reader.readAsText(file);
+        } else {
+            sendRequest(attributeRangesJson);
+        }
+    }
+</script>
+</html>

@@ -95,6 +95,23 @@ header {
   }
 }
 
+#api-demo-section {
+  .benefits-card {
+    @include smooth-transition;
+    color: $primary-blue;
+    padding: 1rem 2rem 2rem;
+    border: 0.2rem solid $primary-blue;
+    border-radius: 0.5rem;
+    box-shadow: 0.4rem 0.4rem 0 $primary-blue;
+    i {
+      font-size: 3rem;
+    }
+    &:hover {
+      color: $dark;
+    }
+  }
+}
+
 footer {
   font-size: 0.75rem;
   color: $light;

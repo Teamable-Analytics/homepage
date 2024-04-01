@@ -139,7 +139,7 @@
             <!-- A text area -->
             <label for="result-team-set"></label>
             <textarea id="result-team-set" class="border rounded-2 w-100 text-muted form-control"
-                                                           style="padding: 1rem; font-family: 'Inconsolata', monospace" rows="20" readonly>
+                      style="padding: 1rem; font-family: 'Inconsolata', monospace" rows="20" readonly>
             </textarea>
             <!-- Make a button at the top right of textarea for copy to clipboard -->
             <button type="button" id="copy-to-clipboard" class="btn btn-primary mt-2">Copy to clipboard</button>
@@ -390,22 +390,25 @@
 
     function handleRun() {
         // get the radio button value
-        const algorithm = document.querySelector('input[name="algorithm-radio"]:checked').value;
-        if (!algorithm) {
+        const selectedAlgorithm = document.querySelector('input[name="algorithm-radio"]:checked').value;
+        if (!selectedAlgorithm) {
             alert("Please select an algorithm");
             return;
         }
-        const allowedKeys = ["requirement_weight", "social_weight", "diversity_weight", "preference_weight"]
-        const parameterWeightsRaw = document.getElementById("criteria-set-parameter-weight").value;
-        const parameterWeights = !parameterWeightsRaw ? {} : JSON.parse(parameterWeightsRaw);
-        const algorithmOptions = {"max_project_preferences": 0, "algorithm_type": algorithm}
-        allowedKeys.forEach((allowedKey) => {
-            if (allowedKey in parameterWeights) {
-                algorithmOptions[allowedKey] = parameterWeights[allowedKey];
-            }
-        });
+        if (selectedAlgorithm === "random") {
+            handleRunRandom();
+        } else if (selectedAlgorithm === "weight") {
+            handleRunWeight();
+        } else if (selectedAlgorithm === "priority") {
+            handleRunPriority();
+        } else if (selectedAlgorithm === "social") {
+            handleRunSocial();
+        } else {
+            alert("Unknown algorithm selected");
+        }
+    }
 
-        // Team Formation Options
+    function _getTeamGenerationOptions() {
         const teamGenerationOptions = {}
         const numTeams = document.getElementById("num-teams").value;
         if (!numTeams) {
@@ -421,9 +424,38 @@
         teamGenerationOptions["total_teams"] = numTeamInt;
         teamGenerationOptions["initial_teams"] = [];
 
-        const studentsRaw = JSON.parse(document.getElementById("students").value);
-        const tranformedStudents = transformStudens(studentsRaw["students"]);
+        return teamGenerationOptions;
+    }
 
+    function _getTransformedStudents() {
+        const studentsRaw = JSON.parse(document.getElementById("students").value);
+        return transformStudens(studentsRaw["students"]);
+    }
+
+    function handleRunRandom() {
+        const randomAlgorithmOptions = {"algorithm_type": "random"};
+        const tranformedStudents = _getTransformedStudents();
+        const teamGenerationOptions = _getTeamGenerationOptions();
+
+        const requestBody = {
+            "students": tranformedStudents,
+            "algorithm_options": randomAlgorithmOptions,
+            "team_generation_options": teamGenerationOptions
+        }
+
+        sendRequest(requestBody);
+    }
+
+    function _getWeightAlgorithmOptions() {
+        const allowedKeys = ["requirement_weight", "social_weight", "diversity_weight", "preference_weight"]
+        const parameterWeightsRaw = document.getElementById("criteria-set-parameter-weight").value;
+        const parameterWeights = !parameterWeightsRaw ? {} : JSON.parse(parameterWeightsRaw);
+        const algorithmOptions = {"max_project_preferences": 0, "algorithm_type": "weight"}
+        allowedKeys.forEach((allowedKey) => {
+            if (allowedKey in parameterWeights) {
+                algorithmOptions[allowedKey] = parameterWeights[allowedKey];
+            }
+        });
         const diversityConstaintsRaw = document.getElementById("criteria-meet-diversity-constraints").value;
         const diversityConstaints = !diversityConstaintsRaw
             ? {"diversify": [], "concentrate": []}
@@ -431,10 +463,77 @@
         algorithmOptions["attributes_to_diversify"] = diversityConstaints["diversify"];
         algorithmOptions["attributes_to_concentrate"] = diversityConstaints["concentrate"];
 
+        return algorithmOptions;
+    }
+
+    function handleRunWeight() {
+        const weightAlgorithmOptions = _getWeightAlgorithmOptions();
+        const teamGenerationOptions = _getTeamGenerationOptions();
+        const tranformedStudents = _getTransformedStudents();
 
         const requestBody = {
             "students": tranformedStudents,
-            "algorithm_options": algorithmOptions,
+            "algorithm_options": weightAlgorithmOptions,
+            "team_generation_options": teamGenerationOptions
+        }
+
+        sendRequest(requestBody);
+    }
+
+    function _getPriorityAlgorithmOptions() {
+        const algorithmOptions = {"max_project_preferences": 0, "algorithm_type": "priority"};
+        const prioritiesRaw = document.getElementById("criteria-priorities").value;
+        const priorities = !prioritiesRaw ? [] : JSON.parse(prioritiesRaw)["priorities"];
+        const transformedPriorities = priorities.map((priority) => {
+            return {
+                "priority_type": priority["type"],
+                "strategy": priority["strategy"],
+                "direction": priority["direction"],
+                "attribute_id": parseInt(Object.entries(mapOtherLevel1).find(([_, name]) => name === priority["attribute_id"])[0]),
+                "value": parseInt(priority["value"]),
+                "threshold": parseInt(priority["threshold"]),
+            }
+        })
+        return {
+            ...algorithmOptions,
+            "priorities": transformedPriorities,
+        }
+    }
+
+    function handleRunPriority() {
+        const priorityAlgorithmOptions = _getPriorityAlgorithmOptions();
+        const teamGenerationOptions = _getTeamGenerationOptions();
+        const tranformedStudents = _getTransformedStudents();
+
+        const requestBody = {
+            "students": tranformedStudents,
+            "algorithm_options": priorityAlgorithmOptions,
+            "team_generation_options": teamGenerationOptions
+        }
+
+        sendRequest(requestBody);
+    }
+
+    function _getSocialAlgorithmOptions() {
+        const algorithmOptions = {"max_project_preferences": 0, "algorithm_type": "social"};
+        const diversityConstaintsRaw = document.getElementById("criteria-meet-diversity-constraints").value;
+        const diversityConstaints = !diversityConstaintsRaw
+            ? {"diversify": [], "concentrate": []}
+            : transformConstraints(JSON.parse(diversityConstaintsRaw));
+        algorithmOptions["attributes_to_diversify"] = diversityConstaints["diversify"];
+        algorithmOptions["attributes_to_concentrate"] = diversityConstaints["concentrate"];
+
+        return algorithmOptions;
+    }
+
+    function handleRunSocial() {
+        const socialAlgorithmOptions = _getSocialAlgorithmOptions();
+        const teamGenerationOptions = _getTeamGenerationOptions();
+        const tranformedStudents = _getTransformedStudents();
+
+        const requestBody = {
+            "students": tranformedStudents,
+            "algorithm_options": socialAlgorithmOptions,
             "team_generation_options": teamGenerationOptions
         }
 

@@ -337,7 +337,7 @@
         }) ?? [];
 
         const concentrateConstraints = constraintsJson["concentrate"];
-        const transformedConcentrateConstraints = concentrateConstraints.map((constraint) => {
+        const transformedConcentrateConstraints = concentrateConstraints?.map((constraint) => {
             const constraintIdx = Object.entries(mapOtherLevel1).find(([_, name]) => name === constraint);
             if (!!constraintIdx) {
                 return parseInt(constraintIdx);
@@ -457,6 +457,7 @@
             }
         });
         const diversityConstaintsRaw = document.getElementById("criteria-meet-diversity-constraints").value;
+        console.log(diversityConstaintsRaw)
         const diversityConstaints = !diversityConstaintsRaw
             ? {"diversify": [], "concentrate": []}
             : transformConstraints(JSON.parse(diversityConstaintsRaw));

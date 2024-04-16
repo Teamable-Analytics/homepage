@@ -54,24 +54,28 @@
             <div class="d-flex flex-column">
 
                 <label class="text-nowrap" for="avg-cosine-difference-metric">Intra-Heterogeneity</label>
+                <small>Example: { "intra_heterogeneity": { "attribute_filter": [ "Gender", "Race" ] } }</small>
                 <input class="form-control-sm w-100 border rounded-2 w-100 text-muted" type="text"
                        id="avg-cosine-difference-metric"
-                       placeholder='Example: { "intra_heterogeneity": { "attribute_filter": [ "Gender", "Race" ] } }'>
+                       placeholder='Average Cosine Difference Config'>
 
                 <label class="text-nowrap mt-2" for="avg-cosine-similarity-metric">Inter-Homogeneity</label>
+                <small>Example: { "inter_homogeneity": { "attribute_filter": [ "Gender", "Race" ] } }</small>
                 <input class="form-control-sm w-100 border rounded-2 w-100 text-muted" type="text"
                        id="avg-cosine-similarity-metric"
-                       placeholder='Example: { "inter_homogeneity": { "attribute_filter": [ "Gender", "Race" ] } }'>
+                       placeholder='Average Cosine Similarity Config'>
 
                 <label class="text-nowrap mt-2" for="avg-solo-status-metric">Solo Status</label>
+                <small>Example: { "solo_status": { "minority_groups_map": { "Race": [ "Asian", "African" ], "GPA": [ "A" ] } } }</small>
                 <input class="form-control-sm w-100 border rounded-2 w-100 text-muted" type="text"
                        id="avg-solo-status-metric"
-                       placeholder='Example: { "solo_status": { "minority_groups_map": { "Race": [ "Asian", "African" ], "GPA": [ "A" ] } } }'>
+                       placeholder='Average Solo Status Config'>
 
                 <label class="text-nowrap mt-2" for="common-time-availability-metric">Common Time Availability</label>
+                <small>Example: { "common_time_availability": { "timeslot_attribute_id": "Timeslots", "available_timeslots": [ "Tue 8-9am", "Tue 9-10am" ] } }</small>
                 <input class="form-control-sm w-100 border rounded-2 w-100 text-muted" type="text"
                        id="common-time-availability-metric"
-                       placeholder='Example: { "common_time_availability": { "timeslot_attribute_id": "Timeslots", "available_timeslots": [ "Tue 8-9am", "Tue 9-10am" ] } }'>
+                       placeholder='Common Time Availability Config'>
 
                 <div class="d-flex align-items-end justify-content-start gap-1">
                     <div class="text-nowrap mt-2">Project Coverage</div>

@@ -96,23 +96,26 @@
                 <div class="d-grid gap-2">
                     <div id="criteria-match-project-requirements-wrapper" hidden>
                         <label for="criteria-match-project-requirements">Match Project Requirements</label>
+                        <small>Examples: { "projects": [] }</small>
                         <input type="text" id="criteria-match-project-requirements" class="form-control"
-                               placeholder='Examples: { "projects": [] }'/>
+                               placeholder='Enter projects'/>
                     </div>
                     <div id="criteria-set-parameter-weight-wrapper" hidden>
-                        <label for="criteria-set-parameter-weight">Set Parameter Weights</label>
+                        <label for="criteria-set-parameter-weight">Set Parameter Weights</label><br/>
+                        <small>Examples: { "requirement_weight": 0, "social_weight": 0, "diversity_weight": 0, "preference_weight": 0 }</small>
                         <input type="text" id="criteria-set-parameter-weight" class="form-control"
-                               placeholder='Examples: { "requirement_weight": 0, "social_weight": 0, "diversity_weight": 0, "preference_weight": 0 }'/>
+                               placeholder='Enter parameter weights'/>
                     </div>
                     <div id="criteria-meet-diversity-constraints-wrapper" hidden>
-                        <label for="criteria-meet-diversity-constraints">Meet Diversity Constraints</label>
+                        <label for="criteria-meet-diversity-constraints">Meet Diversity Constraints</label><br/>
+                        <small>Examples: { "diversify": [ "Gender", "Race" ], "concentrate": [ "Campus" ] }</small>
                         <input type="text" id="criteria-meet-diversity-constraints" class="form-control"
-                               placeholder='Examples: { "diversify": [ "Gender", "Race" ], "concentrate": [ "Campus" ] }'/>
+                               placeholder='Enter diversity constraints params'/>
                     </div>
                     <div id="criteria-priorities-wrapper" hidden>
-                        <label for="criteria-priorities">Priorities</label>
-                        <input type="text" id="criteria-priorities" class="form-control"
-                               placeholder='Examples: { "priorities": [ { "type": "tokenization",  "strategy": "diversify", "attribute_id": "Gender", "direction": "min_of", "value": 2, "threshold": 3 } ] }'/>
+                        <label for="criteria-priorities">Priorities</label><br/>
+                        <small>Examples: { "priorities": [ { "type": "tokenization",  "strategy": "diversify", "attribute_id": "Gender", "direction": "min_of", "value": "Female", "threshold": 2 } ] }</small>
+                        <input type="text" id="criteria-priorities" class="form-control" placeholder="Enter priority params"/>
                     </div>
                 </div>
             </div>
@@ -486,12 +489,14 @@
         const prioritiesRaw = document.getElementById("criteria-priorities").value;
         const priorities = !prioritiesRaw ? [] : JSON.parse(prioritiesRaw)["priorities"];
         const transformedPriorities = priorities.map((priority) => {
+            const mappedAttributeId = parseInt(Object.entries(mapOtherLevel1).find(([_, name]) => name === priority["attribute_id"])[0]);
+            const mappedValue = parseInt(Object.entries(mapOtherLevel2[mappedAttributeId]).find(([_, name]) => name === priority["value"])[0]);
             return {
                 "priority_type": priority["type"],
                 "strategy": priority["strategy"],
                 "direction": priority["direction"],
-                "attribute_id": parseInt(Object.entries(mapOtherLevel1).find(([_, name]) => name === priority["attribute_id"])[0]),
-                "value": parseInt(priority["value"]),
+                "attribute_id": mappedAttributeId,
+                "value": mappedValue,
                 "threshold": parseInt(priority["threshold"]),
             }
         })
